@@ -1,0 +1,48 @@
+2016-07-26T10:19:07.331Z - normal: Load ~/.CocosCreator/settings.json
+2016-07-26T10:19:07.337Z - normal: checking language setting...
+2016-07-26T10:19:07.337Z - normal: Language: zh
+2016-07-26T10:19:08.419Z - success: protocol editor-framework registerred
+2016-07-26T10:19:08.420Z - success: protocol app registerred
+2016-07-26T10:19:08.420Z - success: protocol packages registerred
+2016-07-26T10:19:08.420Z - success: protocol unpack registerred
+2016-07-26T10:19:08.574Z - normal: connected!
+2016-07-26T10:19:08.575Z - normal: Check project C:\Users\bingogame\Documents\HELLO
+2016-07-26T10:19:08.579Z - normal: Initializing Cocos Creator Editor
+2016-07-26T10:19:08.832Z - normal: Initializing Cocos2d
+2016-07-26T10:19:08.953Z - normal: Initializing Asset Database
+2016-07-26T10:19:08.979Z - success: protocol uuid registerred
+2016-07-26T10:19:08.980Z - success: protocol uuid registerred
+2016-07-26T10:19:08.980Z - success: protocol thumbnail registerred
+2016-07-26T10:19:08.980Z - normal: Loading editor/builtin packages
+2016-07-26T10:19:09.093Z - success: assets loaded
+2016-07-26T10:19:09.095Z - success: builder loaded
+2016-07-26T10:19:09.099Z - success: hierarchy loaded
+2016-07-26T10:19:09.102Z - success: inspector loaded
+2016-07-26T10:19:09.103Z - success: keystore loaded
+2016-07-26T10:19:09.106Z - success: node-library loaded
+2016-07-26T10:19:09.109Z - success: preferences loaded
+2016-07-26T10:19:09.124Z - success: project-importer loaded
+2016-07-26T10:19:09.126Z - success: project-settings loaded
+2016-07-26T10:19:09.128Z - success: ui-kit loaded
+2016-07-26T10:19:09.130Z - success: ui-grid loaded
+2016-07-26T10:19:09.133Z - success: scene loaded
+2016-07-26T10:19:09.135Z - success: sprite-editor loaded
+2016-07-26T10:19:09.140Z - success: timeline loaded
+2016-07-26T10:19:09.141Z - success: ui-kit-extra loaded
+2016-07-26T10:19:09.141Z - normal: Loading builtin packages
+2016-07-26T10:19:09.144Z - success: asset-db-debugger loaded
+2016-07-26T10:19:09.146Z - success: code-editor loaded
+2016-07-26T10:19:09.146Z - success: color-picker loaded
+2016-07-26T10:19:09.149Z - success: console loaded
+2016-07-26T10:19:09.151Z - success: package-manager loaded
+2016-07-26T10:19:09.154Z - success: tester loaded
+2016-07-26T10:19:09.156Z - success: ui-tree loaded
+2016-07-26T10:19:09.189Z - normal: Initializing project C:\Users\bingogame\Documents\HELLO
+2016-07-26T10:19:09.191Z - normal: Loading packages
+2016-07-26T10:19:09.194Z - normal: Run Application
+2016-07-26T10:19:09.507Z - success: preview server running at http://localhost:7456
+2016-07-26T10:19:12.321Z - normal: 1.1.2
+2016-07-26T10:19:17.160Z - normal: connected!
+2016-07-26T10:19:18.904Z - warn: Failed to send ipc message scene:is-ready to panel scene, panel not found
+2016-07-26T10:19:19.717Z - normal: 1.1.2
+2016-07-26T10:19:21.911Z - info: shutdown preview server

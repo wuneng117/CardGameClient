@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "sources": [
+    "unknown"
+  ],
+  "names": [],
+  "mappings": "AAAA,EAAE,CAAC,KAAK,CAAC;AACL,eAAS,EAAE,CAAC,SAAS;;AAErB,cAAU,EAAE;;;;;;;;;;;AAWR,eAAO,EAAE;AACL,uBAAS,IAAI;AACb,gBAAI,EAAE,EAAE,CAAC,KAAK;SACjB;;AAED,qBAAa,EAAE;AACX,uBAAS,IAAI;AACb,gBAAI,EAAE,EAAE,CAAC,KAAK;SACjB;;AAED,gBAAQ,EAAE;AACN,uBAAS,IAAI;AACb,gBAAI,EAAE,EAAE,CAAC,KAAK;SACjB;;AAED,iBAAS,EAAE;AACP,uBAAS,IAAI;AACb,gBAAI,EAAE,EAAE,CAAC,KAAK;SACjB;KACJ;;;AAGD,UAAM,EAAE,kBAAY,EAEnB;;AAED,QAAI,EAAE,cAAS,IAAI,EAAE;;AAEjB,YAAI,CAAC,OAAO,CAAC,MAAM,GAAG,IAAI,CAAC,EAAE,CAAC,QAAQ,EAAE,CAAC;AACzC,YAAI,CAAC,aAAa,CAAC,MAAM,GAAG,IAAI,CAAC,QAAQ,CAAC,QAAQ,EAAE,CAAC;AACrD,YAAI,CAAC,QAAQ,CAAC,MAAM,GAAG,IAAI,CAAC,GAAG,CAAC,QAAQ,EAAE,CAAC;AAC3C,YAAI,CAAC,SAAS,CAAC,MAAM,GAAG,IAAI,CAAC,QAAQ,CAAC,QAAQ,EAAE,CAAC;KACpD;;CAMJ,CAAC,CAAC",
+  "file": "unknown",
+  "sourcesContent": [
+    "cc.Class({\r\n    extends: cc.Component,\r\n\r\n    properties: {\r\n        // foo: {\r\n        //    default: null,\r\n        //    url: cc.Texture2D,  // optional, default is typeof default\r\n        //    serializable: true, // optional, default is true\r\n        //    visible: true,      // optional, default is true\r\n        //    displayName: 'Foo', // optional\r\n        //    readonly: false,    // optional, default is false\r\n        // },\r\n        // ...\r\n        \r\n        hpLabel: {\r\n            default: null,\r\n            type: cc.Label\r\n        },\r\n        \r\n        criticalLabel: {\r\n            default: null,\r\n            type: cc.Label\r\n        },\r\n        \r\n        atkLabel: {\r\n            default: null,\r\n            type: cc.Label\r\n        },\r\n        \r\n        nameLabel: {\r\n            default: null,\r\n            type: cc.Label\r\n        },\r\n    },\r\n\r\n    // use this for initialization\r\n    onLoad: function () {\r\n\r\n    },\r\n    \r\n    init: function(card) {\r\n    \r\n        this.hpLabel.string = card.hp.toString();\r\n        this.criticalLabel.string = card.critical.toString();\r\n        this.atklabel.string = card.atk.toString();\r\n        this.nameLabel.string = card.cardName.toString();\r\n    },\r\n    \r\n    // called every frame, uncomment this function to activate update callback\r\n    // update: function (dt) {\r\n\r\n    // },\r\n});\r\n"
+  ]
+}
