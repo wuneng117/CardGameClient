@@ -2,10 +2,10 @@
   "version": "1.1.2",
   "windows": {
     "main": {
-      "x": -8,
-      "y": -8,
+      "x": -4,
+      "y": 2,
       "width": 1936,
-      "height": 1056,
+      "height": 1054,
       "layout": {
         "docks": [
           {
@@ -21,7 +21,7 @@
               },
               {
                 "active": 0,
-                "height": 463,
+                "height": 461,
                 "panels": [
                   "assets"
                 ],
@@ -29,7 +29,7 @@
                 "width": 305
               }
             ],
-            "height": 929,
+            "height": 927,
             "row": false,
             "type": "dock",
             "width": 305
@@ -40,7 +40,7 @@
                 "docks": [
                   {
                     "active": 0,
-                    "height": 455,
+                    "height": 454,
                     "panels": [
                       "scene"
                     ],
@@ -49,7 +49,7 @@
                   },
                   {
                     "active": 0,
-                    "height": 455,
+                    "height": 454,
                     "panels": [
                       "node-library"
                     ],
@@ -57,14 +57,14 @@
                     "width": 458
                   }
                 ],
-                "height": 455,
+                "height": 454,
                 "row": true,
                 "type": "dock",
                 "width": 1146
               },
               {
                 "active": 0,
-                "height": 471,
+                "height": 470,
                 "panels": [
                   "console",
                   "timeline"
@@ -73,14 +73,14 @@
                 "width": 1146
               }
             ],
-            "height": 929,
+            "height": 927,
             "row": false,
             "type": "dock",
             "width": 1146
           },
           {
             "active": 0,
-            "height": 929,
+            "height": 927,
             "panels": [
               "inspector"
             ],

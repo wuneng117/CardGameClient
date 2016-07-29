@@ -1,7 +1,6 @@
 "use strict";
-cc._RFpush(module, '774273aTPtIlLcUjnpLZlVZ', 'card');
-// Script\card.js
-
+cc._RFpush(module, '97b2cKHFm5Aw7y0vU8kdrYO', 'monster');
+// Script\monster.js
 
 cc.Class({
     "extends": cc.Component,
@@ -22,17 +21,45 @@ cc.Class({
         cardName: "",
         critical: 0,
         atk: 0,
-        hp: 0
+        hp: 0,
+        maxHp: 0,
+        isAtked: true },
+
+    //本回合是否攻击过
+    //扣除HP
+    reduceHp: function reduceHp(num) {
+        if (num <= 0) return;
+
+        this.hp -= num;
+        //死了就杀掉这个随从
+        if (this.isDead()) this._player.killMonster(this);
+
+        this._player.refreshMonsterField();
+    },
+
+    //回复HP
+    addHp: function addHp(num) {
+        if (num <= 0) return;
+
+        this.hp += num;
+        if (this.hp > this.maxHp) this.hp = this.maxHp;
+
+        this._player.refreshMonsterField();
+    },
+
+    isDead: function isDead() {
+        if (this.hp <= 0) return true;
     },
 
     // use this for initialization
     onLoad: function onLoad() {},
 
-    init: function init(cardData, player, idx) {
-        this.critical = cardData.critical;
-        this.cardName = cardData.cardName;
-        this.atk = cardData.atk;
-        this.hp = cardData.hp;
+    init: function init(card, player, idx) {
+        this.cardName = card.cardName;
+        this.critical = card.critical;
+        this.atk = card.atk;
+        this.hp = card.hp;
+        this.maxHp = card.hp;
 
         this._player = player;
         this._idx = idx;

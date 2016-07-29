@@ -4,9 +4,9 @@
     "unknown"
   ],
   "names": [],
-  "mappings": "AAAA,EAAE,CAAC,KAAK,CAAC;AACL,eAAS,EAAE,CAAC,SAAS;;AAErB,cAAU,EAAE,EACX;;;AAGD,UAAM,EAAE,kBAAY,EACnB;;;AAGD,UAAM,EAAE,gBAAU,EAAE,EAAE,EAErB;CACJ,CAAC,CAAC",
+  "mappings": "AAAA,IAAM,eAAe,GAAG,OAAO,CAAC,wBAAwB,CAAC,CAAC;;AAE1D,EAAE,CAAC,KAAK,CAAC;AACL,eAAS,EAAE,CAAC,SAAS;;AAErB,cAAU,EAAE,EACX;;;AAGD,UAAM,EAAE,kBAAY;AAChB,uBAAe,CAAC,IAAI,EAAE,CAAC;KAC1B;;;AAGD,UAAM,EAAE,gBAAU,EAAE,EAAE,EAErB;CACJ,CAAC,CAAC",
   "file": "unknown",
   "sourcesContent": [
-    "cc.Class({\n    extends: cc.Component,\n\n    properties: {\n    },\n\n    // use this for initialization\n    onLoad: function () {\n    },\n\n    // called every frame\n    update: function (dt) {\n\n    },\n});\n"
+    "const CardDataManager = require('./data/CardDataManager');\n\ncc.Class({\n    extends: cc.Component,\n\n    properties: {\n    },\n\n    // use this for initialization\n    onLoad: function () {\n        CardDataManager.init();\n    },\n\n    // called every frame\n    update: function (dt) {\n\n    },\n});\n"
   ]
 }

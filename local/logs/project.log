@@ -1,48 +1,119 @@
-2016-07-26T10:19:07.331Z - normal: Load ~/.CocosCreator/settings.json
-2016-07-26T10:19:07.337Z - normal: checking language setting...
-2016-07-26T10:19:07.337Z - normal: Language: zh
-2016-07-26T10:19:08.419Z - success: protocol editor-framework registerred
-2016-07-26T10:19:08.420Z - success: protocol app registerred
-2016-07-26T10:19:08.420Z - success: protocol packages registerred
-2016-07-26T10:19:08.420Z - success: protocol unpack registerred
-2016-07-26T10:19:08.574Z - normal: connected!
-2016-07-26T10:19:08.575Z - normal: Check project C:\Users\bingogame\Documents\HELLO
-2016-07-26T10:19:08.579Z - normal: Initializing Cocos Creator Editor
-2016-07-26T10:19:08.832Z - normal: Initializing Cocos2d
-2016-07-26T10:19:08.953Z - normal: Initializing Asset Database
-2016-07-26T10:19:08.979Z - success: protocol uuid registerred
-2016-07-26T10:19:08.980Z - success: protocol uuid registerred
-2016-07-26T10:19:08.980Z - success: protocol thumbnail registerred
-2016-07-26T10:19:08.980Z - normal: Loading editor/builtin packages
-2016-07-26T10:19:09.093Z - success: assets loaded
-2016-07-26T10:19:09.095Z - success: builder loaded
-2016-07-26T10:19:09.099Z - success: hierarchy loaded
-2016-07-26T10:19:09.102Z - success: inspector loaded
-2016-07-26T10:19:09.103Z - success: keystore loaded
-2016-07-26T10:19:09.106Z - success: node-library loaded
-2016-07-26T10:19:09.109Z - success: preferences loaded
-2016-07-26T10:19:09.124Z - success: project-importer loaded
-2016-07-26T10:19:09.126Z - success: project-settings loaded
-2016-07-26T10:19:09.128Z - success: ui-kit loaded
-2016-07-26T10:19:09.130Z - success: ui-grid loaded
-2016-07-26T10:19:09.133Z - success: scene loaded
-2016-07-26T10:19:09.135Z - success: sprite-editor loaded
-2016-07-26T10:19:09.140Z - success: timeline loaded
-2016-07-26T10:19:09.141Z - success: ui-kit-extra loaded
-2016-07-26T10:19:09.141Z - normal: Loading builtin packages
-2016-07-26T10:19:09.144Z - success: asset-db-debugger loaded
-2016-07-26T10:19:09.146Z - success: code-editor loaded
-2016-07-26T10:19:09.146Z - success: color-picker loaded
-2016-07-26T10:19:09.149Z - success: console loaded
-2016-07-26T10:19:09.151Z - success: package-manager loaded
-2016-07-26T10:19:09.154Z - success: tester loaded
-2016-07-26T10:19:09.156Z - success: ui-tree loaded
-2016-07-26T10:19:09.189Z - normal: Initializing project C:\Users\bingogame\Documents\HELLO
-2016-07-26T10:19:09.191Z - normal: Loading packages
-2016-07-26T10:19:09.194Z - normal: Run Application
-2016-07-26T10:19:09.507Z - success: preview server running at http://localhost:7456
-2016-07-26T10:19:12.321Z - normal: 1.1.2
-2016-07-26T10:19:17.160Z - normal: connected!
-2016-07-26T10:19:18.904Z - warn: Failed to send ipc message scene:is-ready to panel scene, panel not found
-2016-07-26T10:19:19.717Z - normal: 1.1.2
-2016-07-26T10:19:21.911Z - info: shutdown preview server
+2016-07-29T09:45:01.023Z - normal: Load ~/.CocosCreator/settings.json
+2016-07-29T09:45:01.028Z - normal: checking language setting...
+2016-07-29T09:45:01.029Z - normal: Language: zh
+2016-07-29T09:45:02.140Z - success: protocol editor-framework registerred
+2016-07-29T09:45:02.141Z - success: protocol app registerred
+2016-07-29T09:45:02.141Z - success: protocol packages registerred
+2016-07-29T09:45:02.141Z - success: protocol unpack registerred
+2016-07-29T09:45:02.315Z - normal: connected!
+2016-07-29T09:45:02.318Z - normal: Check project C:\Users\bingogame\Documents\HELLO
+2016-07-29T09:45:02.320Z - normal: Initializing Cocos Creator Editor
+2016-07-29T09:45:02.885Z - normal: Initializing Cocos2d
+2016-07-29T09:45:03.378Z - normal: Initializing Asset Database
+2016-07-29T09:45:03.444Z - success: protocol uuid registerred
+2016-07-29T09:45:03.444Z - success: protocol uuid registerred
+2016-07-29T09:45:03.444Z - success: protocol thumbnail registerred
+2016-07-29T09:45:03.445Z - normal: Loading editor/builtin packages
+2016-07-29T09:45:03.647Z - success: assets loaded
+2016-07-29T09:45:03.650Z - success: builder loaded
+2016-07-29T09:45:03.654Z - success: hierarchy loaded
+2016-07-29T09:45:03.657Z - success: inspector loaded
+2016-07-29T09:45:03.658Z - success: keystore loaded
+2016-07-29T09:45:03.662Z - success: node-library loaded
+2016-07-29T09:45:03.664Z - success: preferences loaded
+2016-07-29T09:45:03.680Z - success: project-importer loaded
+2016-07-29T09:45:03.682Z - success: project-settings loaded
+2016-07-29T09:45:03.684Z - success: ui-kit loaded
+2016-07-29T09:45:03.691Z - success: ui-grid loaded
+2016-07-29T09:45:03.700Z - success: scene loaded
+2016-07-29T09:45:03.702Z - success: sprite-editor loaded
+2016-07-29T09:45:03.707Z - success: timeline loaded
+2016-07-29T09:45:03.709Z - success: ui-kit-extra loaded
+2016-07-29T09:45:03.709Z - normal: Loading builtin packages
+2016-07-29T09:45:03.750Z - success: asset-db-debugger loaded
+2016-07-29T09:45:03.752Z - success: code-editor loaded
+2016-07-29T09:45:03.753Z - success: color-picker loaded
+2016-07-29T09:45:03.756Z - success: console loaded
+2016-07-29T09:45:03.759Z - success: package-manager loaded
+2016-07-29T09:45:03.762Z - success: tester loaded
+2016-07-29T09:45:03.764Z - success: ui-tree loaded
+2016-07-29T09:45:03.826Z - normal: Initializing project C:\Users\bingogame\Documents\HELLO
+2016-07-29T09:45:03.828Z - normal: Loading packages
+2016-07-29T09:45:03.836Z - normal: Run Application
+2016-07-29T09:45:04.822Z - success: preview server running at http://localhost:7456
+2016-07-29T09:45:07.083Z - normal: Connected to internet, please login...
+2016-07-29T09:45:08.964Z - normal: 1.1.2
+2016-07-29T09:45:49.059Z - normal: login utils error: Error: connect ETIMEDOUT 211.151.21.150:443
+2016-07-29T09:46:05.123Z - error: { [Error: connect ETIMEDOUT 211.151.21.150:443]
+  code: 'ETIMEDOUT',
+  errno: 'ETIMEDOUT',
+  syscall: 'connect',
+  address: '211.151.21.150',
+  port: 443 }
+    at D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:328
+    at ClientRequest.<anonymous> (D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:1789)
+    at emitOne (events.js:77:13)
+    at ClientRequest.emit (events.js:169:7)
+    at TLSSocket.socketErrorListener (_http_client.js:265:9)
+    at emitOne (events.js:77:13)
+    at TLSSocket.emit (events.js:169:7)
+    at emitErrorNT (net.js:1253:8)
+    at doNTCallback2 (node.js:465:9)
+2016-07-29T09:46:05.123Z - normal: failed to get user details.
+2016-07-29T09:46:26.126Z - error: { [Error: connect ETIMEDOUT 211.151.21.150:443]
+  code: 'ETIMEDOUT',
+  errno: 'ETIMEDOUT',
+  syscall: 'connect',
+  address: '211.151.21.150',
+  port: 443 }
+    at D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:729
+    at ClientRequest.<anonymous> (D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:1789)
+    at emitOne (events.js:77:13)
+    at ClientRequest.emit (events.js:169:7)
+    at TLSSocket.socketErrorListener (_http_client.js:265:9)
+    at emitOne (events.js:77:13)
+    at TLSSocket.emit (events.js:169:7)
+    at emitErrorNT (net.js:1253:8)
+    at doNTCallback2 (node.js:465:9)
+2016-07-29T09:46:26.127Z - normal: [SyntaxError: Unexpected end of input]
+2016-07-29T09:46:26.129Z - error: Error: Object has been destroyed
+    at Error (native)
+    at EventEmitter.webContents.send (D:\CocosCreator\resources\atom.asar\browser\api\web-contents.js:83:17)
+    at a.waitForReply.n.reply (D:\CocosCreator\resources\app.asar\editor-framework\lib\main\ipc.js:1:2869)
+    at D:\CocosCreator\resources\app.asar\share\login\index.js:1:573
+    at D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:3598
+    at D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:1055
+    at D:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:726:13
+    at D:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:52:16
+    at D:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:269:32
+    at D:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:44:16
+    at process.<anonymous> (D:\CocosCreator\resources\app.asar\editor\core\editor-init.js:1:205)
+    at emitOne (events.js:82:20)
+    at process.emit (events.js:169:7)
+    at process._fatalException (node.js:247:26)
+2016-07-29T09:46:26.130Z - error: { [Error: socket hang up] code: 'ECONNRESET' }
+    at D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:729
+    at ClientRequest.<anonymous> (D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:1789)
+    at emitOne (events.js:77:13)
+    at ClientRequest.emit (events.js:169:7)
+    at TLSSocket.socketCloseListener (_http_client.js:241:9)
+    at emitOne (events.js:82:20)
+    at TLSSocket.emit (events.js:169:7)
+    at TCP._onclose (net.js:469:12)
+2016-07-29T09:46:26.131Z - normal: [SyntaxError: Unexpected end of input]
+2016-07-29T09:46:26.132Z - error: Error: Object has been destroyed
+    at Error (native)
+    at EventEmitter.webContents.send (D:\CocosCreator\resources\atom.asar\browser\api\web-contents.js:83:17)
+    at a.waitForReply.n.reply (D:\CocosCreator\resources\app.asar\editor-framework\lib\main\ipc.js:1:2869)
+    at D:\CocosCreator\resources\app.asar\share\login\index.js:1:573
+    at D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:3598
+    at D:\CocosCreator\resources\app.asar\share\login\login-utils.js:1:1055
+    at D:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:726:13
+    at D:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:52:16
+    at D:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:269:32
+    at D:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:44:16
+    at process.<anonymous> (D:\CocosCreator\resources\app.asar\editor\core\editor-init.js:1:205)
+    at emitOne (events.js:82:20)
+    at process.emit (events.js:169:7)
+    at process._fatalException (node.js:247:26)
+2016-07-29T09:46:26.581Z - info: shutdown preview server
