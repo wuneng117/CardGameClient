@@ -5,6 +5,7 @@ cc._RFpush(module, '74868lChLJHkqxOmGjhUhkk', 'duel');
 //处理对战流程的关键类
 
 var Player = require('player');
+var ChatWnd = require('ChatWnd');
 
 var tempDeck = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 cc.Class({
@@ -36,6 +37,12 @@ cc.Class({
         opponentPlayer: {
             'default': null,
             type: Player
+        },
+
+        //聊天窗口脚本
+        chatWnd: {
+            'default': null,
+            type: ChatWnd
         },
 
         turn: 0, //当前双方总回合数
@@ -147,7 +154,7 @@ cc.Class({
     },
 
     //回合结束（按钮调用）
-    turnEnd: function turnEnd() {
+    turnEnd_BtnEvent: function turnEnd_BtnEvent(event) {
         //不是MainPhase这个按钮不能按
         if (this.turnPhase !== PHASE_MAIN_TURN) return;
 
@@ -219,12 +226,13 @@ cc.Class({
     },
 
     start: function start() {
-        this.startGame();
+        //this.startGame();
+        this.chatWnd.addChatItem('[玩家1]:HI，大家好');
     },
 
     // called every frame, uncomment this function to activate update callback
     update: function update(dt) {
-        this.turnFunc[this.turnPhase]();
+        //this.turnFunc[this.turnPhase]();
     }
 });
 

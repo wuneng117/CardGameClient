@@ -8,26 +8,24 @@ window.WC_CONNECTED = 'WC_CONNECTED';
 window.CW_LOGIN = 'CW_LOGIN';
 window.WC_LOGIN = 'WC_LOGIN';
 
-window.showTipLabel = function showTipLabel(str, color) 
-{
+window.showTipLabel = function showTipLabel(str, color) {
     //文字标签创建
     var node = new cc.Node();
     var label = node.addComponent(cc.Label);
-    if(color)
-        node.color = color;
-        
+    if (color) node.color = color;
+
     label.string = str;
-    node.setPosition(0,0);
+    node.setPosition(0, 0);
     var scene = cc.director.getScene().getChildByName('Canvas');
     scene.addChild(node);
-    
+
     //2秒后消失
     var fadeout = cc.fadeOut(2);
-    var callFunc = cc.callFunc(function(node) {
+    var callFunc = cc.callFunc(function (node) {
         cc.log('node is what:%s', node.x);
         node.destroy();
-    }, node, null)
-    
+    }, node, null);
+
     var seq = cc.sequence(fadeout, callFunc);
     node.runAction(seq);
-}
+};

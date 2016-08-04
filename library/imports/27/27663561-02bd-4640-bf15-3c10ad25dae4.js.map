@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "sources": [
+    "unknown"
+  ],
+  "names": [],
+  "mappings": "AAAA,MAAM,CAAC,WAAW,GAAG,CAAC,CAAC;AACvB,MAAM,CAAC,eAAe,GAAG,CAAC,CAAC;AAC3B,MAAM,CAAC,gBAAgB,GAAG,CAAC,CAAC;AAC5B,MAAM,CAAC,eAAe,GAAG,CAAC,CAAC;AAC3B,MAAM,CAAC,cAAc,GAAG,CAAC,CAAC;;AAE1B,MAAM,CAAC,YAAY,GAAG,cAAc,CAAC;AACrC,MAAM,CAAC,QAAQ,GAAG,UAAU,CAAC;AAC7B,MAAM,CAAC,QAAQ,GAAG,UAAU,CAAC;;AAE7B,MAAM,CAAC,YAAY,GAAG,SAAS,YAAY,CAAC,GAAG,EAAE,KAAK,EACtD;;AAEI,QAAI,IAAI,GAAG,IAAI,EAAE,CAAC,IAAI,EAAE,CAAC;AACzB,QAAI,KAAK,GAAG,IAAI,CAAC,YAAY,CAAC,EAAE,CAAC,KAAK,CAAC,CAAC;AACxC,QAAG,KAAK,EACJ,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;;AAEvB,SAAK,CAAC,MAAM,GAAG,GAAG,CAAC;AACnB,QAAI,CAAC,WAAW,CAAC,CAAC,EAAC,CAAC,CAAC,CAAC;AACtB,QAAI,KAAK,GAAG,EAAE,CAAC,QAAQ,CAAC,QAAQ,EAAE,CAAC,cAAc,CAAC,QAAQ,CAAC,CAAC;AAC5D,SAAK,CAAC,QAAQ,CAAC,IAAI,CAAC,CAAC;;;AAGrB,QAAI,OAAO,GAAG,EAAE,CAAC,OAAO,CAAC,CAAC,CAAC,CAAC;AAC5B,QAAI,QAAQ,GAAG,EAAE,CAAC,QAAQ,CAAC,UAAS,IAAI,EAAE;AACtC,UAAE,CAAC,GAAG,CAAC,iBAAiB,EAAE,IAAI,CAAC,CAAC,CAAC,CAAC;AAClC,YAAI,CAAC,OAAO,EAAE,CAAC;KAClB,EAAE,IAAI,EAAE,IAAI,CAAC,CAAA;;AAEd,QAAI,GAAG,GAAG,EAAE,CAAC,QAAQ,CAAC,OAAO,EAAE,QAAQ,CAAC,CAAC;AACzC,QAAI,CAAC,SAAS,CAAC,GAAG,CAAC,CAAC;CACvB,CAAA",
+  "file": "unknown",
+  "sourcesContent": [
+    "window.PLAYER_SELF = 1;\r\nwindow.PLAYER_OPPONENT = 2;\r\nwindow.PHASE_BEGIN_TURN = 1;\r\nwindow.PHASE_MAIN_TURN = 2;\r\nwindow.PHASE_END_TURN = 3;\r\n\r\nwindow.WC_CONNECTED = 'WC_CONNECTED';\r\nwindow.CW_LOGIN = 'CW_LOGIN';\r\nwindow.WC_LOGIN = 'WC_LOGIN';\r\n\r\nwindow.showTipLabel = function showTipLabel(str, color) \r\n{\r\n    //文字标签创建\r\n    var node = new cc.Node();\r\n    var label = node.addComponent(cc.Label);\r\n    if(color)\r\n        node.color = color;\r\n        \r\n    label.string = str;\r\n    node.setPosition(0,0);\r\n    var scene = cc.director.getScene().getChildByName('Canvas');\r\n    scene.addChild(node);\r\n    \r\n    //2秒后消失\r\n    var fadeout = cc.fadeOut(2);\r\n    var callFunc = cc.callFunc(function(node) {\r\n        cc.log('node is what:%s', node.x);\r\n        node.destroy();\r\n    }, node, null)\r\n    \r\n    var seq = cc.sequence(fadeout, callFunc);\r\n    node.runAction(seq);\r\n}\r\n"
+  ]
+}
