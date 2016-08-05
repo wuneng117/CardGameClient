@@ -1,12 +1,12 @@
 {
   "29f52784-2fca-467b-92e7-8fd9ef8c57b7": {
-    "asset": 1470206581224,
-    "meta": 1470211344266,
+    "asset": 1470307930585,
+    "meta": 1470367045320,
     "relativePath": "Scene"
   },
   "4734c20c-0db8-4eb2-92ea-e692f4d70934": {
-    "asset": 1470211084509,
-    "meta": 1470211344268,
+    "asset": 1470307930595,
+    "meta": 1470367045372,
     "relativePath": "Script"
   },
   "280c3aec-6492-4a9d-9f51-a9b00b570b4a": {
@@ -15,8 +15,8 @@
     "relativePath": "Script\\HelloWorld.js"
   },
   "2d2f792f-a40c-49bb-a189-ed176a246e49": {
-    "asset": 1470307727777,
-    "meta": 1470307727789,
+    "asset": 1470307930586,
+    "meta": 1470367045371,
     "relativePath": "Scene\\helloworld.fire"
   },
   "7b81d4e8-ec84-4716-968d-500ac1d78a54": {
@@ -65,8 +65,8 @@
     "relativePath": "Script\\data\\CardData.js"
   },
   "c8c0ae01-bad2-4c02-abb0-f5de6c32a7e2": {
-    "asset": 1469784474902,
-    "meta": 1469784475011,
+    "asset": 1470392386622,
+    "meta": 1470392386912,
     "relativePath": "Script\\player.js"
   },
   "203c0784-ab52-4324-b0ad-d12d9cd31308": {
@@ -75,13 +75,13 @@
     "relativePath": "LocalPlayer.prefab"
   },
   "74868942-84b2-4792-ac4e-9868e1521924": {
-    "asset": 1470306281879,
-    "meta": 1470306281968,
+    "asset": 1470385921705,
+    "meta": 1470385921776,
     "relativePath": "Script\\duel.js"
   },
   "27663561-02bd-4640-bf15-3c10ad25dae4": {
-    "asset": 1470214395852,
-    "meta": 1470214395899,
+    "asset": 1470385801306,
+    "meta": 1470385801380,
     "relativePath": "Script\\type.js"
   },
   "d7da46aa-067a-4aae-b4ca-da1e8f6d1e76": {
@@ -260,43 +260,43 @@
     "relativePath": "prefab\\videoplayer.prefab"
   },
   "57172331-4ddc-482a-9be0-4efcbc29e516": {
-    "asset": 1470110060311,
-    "meta": 1470110064368,
+    "asset": 1470307930593,
+    "meta": 1470367050073,
     "relativePath": "Script\\NetWork\\socket.io.js"
   },
   "11e175a5-b037-48d1-8455-cfbfee713025": {
-    "asset": 1470278241324,
-    "meta": 1470278241346,
+    "asset": 1470307930584,
+    "meta": 1470367046320,
     "relativePath": "Scene\\LoginScene.fire"
   },
   "e0dd09b4-2aa4-496f-b6aa-1df36f37d4ae": {
-    "asset": 1470211462847,
-    "meta": 1470276838031,
+    "asset": 1470307930594,
+    "meta": 1470367046343,
     "relativePath": "Script\\NetWork"
   },
   "f3a087a4-64c5-462e-a26b-e326faf85a68": {
-    "asset": 1470299632280,
-    "meta": 1470299632403,
+    "asset": 1470385263193,
+    "meta": 1470385263265,
     "relativePath": "Script\\NetWork\\GameConn.js"
   },
   "a69b5e01-3b08-4ced-9aaf-f38b0de2db8f": {
-    "asset": 1470298824193,
-    "meta": 1470298824229,
+    "asset": 1470392654686,
+    "meta": 1470392654722,
     "relativePath": "Script\\NetWork\\EventProcess.js"
   },
   "fb431d04-0e1f-496e-909f-fd0c6229f6c0": {
-    "asset": 1470298791074,
-    "meta": 1470298791112,
+    "asset": 1470307930588,
+    "meta": 1470367046321,
     "relativePath": "Script\\LoginScene.js"
   },
   "a4bdbc2c-0c07-4eb1-bc21-70c5cb07a59b": {
-    "asset": 1470307702498,
-    "meta": 1470307702514,
+    "asset": 1470307930583,
+    "meta": 1470367045346,
     "relativePath": "ChatWndItem.prefab"
   },
   "546eafbe-9c90-4e42-8337-b99f9eb79aff": {
-    "asset": 1470307855529,
-    "meta": 1470307855561,
+    "asset": 1470368154394,
+    "meta": 1470368154420,
     "relativePath": "Script\\ChatWnd.js"
   }
 }

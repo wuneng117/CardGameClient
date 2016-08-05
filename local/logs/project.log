@@ -1,168 +1,83 @@
-2016-08-04T02:13:51.732Z - normal: Load ~/.CocosCreator/settings.json
-2016-08-04T02:13:51.737Z - normal: checking language setting...
-2016-08-04T02:13:51.737Z - normal: Language: zh
-2016-08-04T02:13:52.848Z - success: protocol editor-framework registerred
-2016-08-04T02:13:52.849Z - success: protocol app registerred
-2016-08-04T02:13:52.849Z - success: protocol packages registerred
-2016-08-04T02:13:52.849Z - success: protocol unpack registerred
-2016-08-04T02:13:53.024Z - normal: connected!
-2016-08-04T02:13:53.028Z - normal: Check project C:\Users\bingogame\Documents\HELLO
-2016-08-04T02:13:53.033Z - normal: Initializing Cocos Creator Editor
-2016-08-04T02:13:54.040Z - normal: Initializing Cocos2d
-2016-08-04T02:13:56.207Z - normal: Initializing Asset Database
-2016-08-04T02:13:56.359Z - success: protocol uuid registerred
-2016-08-04T02:13:56.359Z - success: protocol uuid registerred
-2016-08-04T02:13:56.360Z - success: protocol thumbnail registerred
-2016-08-04T02:13:56.360Z - normal: Loading editor/builtin packages
-2016-08-04T02:13:56.629Z - success: assets loaded
-2016-08-04T02:13:56.631Z - success: builder loaded
-2016-08-04T02:13:56.635Z - success: hierarchy loaded
-2016-08-04T02:13:56.639Z - success: inspector loaded
-2016-08-04T02:13:56.669Z - success: keystore loaded
-2016-08-04T02:13:56.703Z - success: node-library loaded
-2016-08-04T02:13:56.706Z - success: preferences loaded
-2016-08-04T02:13:56.755Z - success: project-importer loaded
-2016-08-04T02:13:56.758Z - success: project-settings loaded
-2016-08-04T02:13:56.760Z - success: ui-kit loaded
-2016-08-04T02:13:56.772Z - success: ui-grid loaded
-2016-08-04T02:13:56.777Z - success: scene loaded
-2016-08-04T02:13:56.778Z - success: sprite-editor loaded
-2016-08-04T02:13:56.799Z - success: timeline loaded
-2016-08-04T02:13:56.801Z - success: ui-kit-extra loaded
-2016-08-04T02:13:56.801Z - normal: Loading builtin packages
-2016-08-04T02:13:56.816Z - success: asset-db-debugger loaded
-2016-08-04T02:13:56.818Z - success: code-editor loaded
-2016-08-04T02:13:56.818Z - success: color-picker loaded
-2016-08-04T02:13:56.822Z - success: console loaded
-2016-08-04T02:13:56.824Z - success: package-manager loaded
-2016-08-04T02:13:56.866Z - success: tester loaded
-2016-08-04T02:13:56.868Z - success: ui-tree loaded
-2016-08-04T02:13:56.938Z - normal: Initializing project C:\Users\bingogame\Documents\HELLO
-2016-08-04T02:13:56.958Z - normal: Loading packages
-2016-08-04T02:13:56.961Z - normal: Run Application
-2016-08-04T02:13:58.729Z - success: preview server running at http://localhost:7456
-2016-08-04T02:14:04.340Z - normal: 1.1.2
-2016-08-04T04:00:33.888Z - normal: Compiled successfully
-2016-08-04T07:12:31.544Z - normal: Compiled successfully
-2016-08-04T07:14:01.883Z - normal: Compiled successfully
-2016-08-04T07:14:15.704Z - normal: Compiled successfully
-2016-08-04T07:15:59.439Z - normal: Compiled successfully
-2016-08-04T07:16:21.930Z - normal: Compiled successfully
-2016-08-04T07:27:51.313Z - normal: Compiled successfully
-2016-08-04T07:38:03.366Z - normal: Compiled successfully
-2016-08-04T07:43:53.347Z - error: Failed to update asset db://assets/Script/NetWork/EventProcess.js, messages: SyntaxError: unknown: Unexpected token (47:15)
-        WC_LOGIN: function(param) {
-            cc.log("登录返回：%d", msg.error);
-            if()
-        },
-        
-    },
-    at Parser.pp.raise (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\location.js:24:13)
-    at Parser.pp.unexpected (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\util.js:82:8)
-    at Parser.pp.parseExprAtom (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:425:12)
-    at Parser.parseExprAtom (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\plugins\jsx\index.js:412:22)
-    at Parser.pp.parseExprSubscripts (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:236:19)
-    at Parser.pp.parseMaybeUnary (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:217:19)
-    at Parser.pp.parseExprOps (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:163:19)
-    at Parser.pp.parseMaybeConditional (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:145:19)
-    at Parser.pp.parseMaybeAssign (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:112:19)
-    at Parser.pp.parseExpression (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:79:19)
-    at s.AssetDB.error (C:\CocosCreator\resources\app.asar\asset-db\lib\utils.js:1:2582)
-    at Object.callback (C:\CocosCreator\resources\app.asar\asset-db\core\ipc.js:1:4288)
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:906:35
-    at _arrayEach (C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:85:13)
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:898:17
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:44:16
-    at s.<anonymous> (C:\CocosCreator\resources\app.asar\asset-db\index.js:1:1406)
-    at C:\CocosCreator\resources\app.asar\asset-db\lib\tasks.js:1:18991
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:52:16
-2016-08-04T07:43:55.932Z - error: Failed to update asset db://assets/Script/NetWork/EventProcess.js, messages: SyntaxError: unknown: Unexpected token (47:15)
-        WC_LOGIN: function(param) {
-            cc.log("登录返回：%d", param.error);
-            if()
-        },
-        
-    },
-    at Parser.pp.raise (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\location.js:24:13)
-    at Parser.pp.unexpected (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\util.js:82:8)
-    at Parser.pp.parseExprAtom (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:425:12)
-    at Parser.parseExprAtom (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\plugins\jsx\index.js:412:22)
-    at Parser.pp.parseExprSubscripts (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:236:19)
-    at Parser.pp.parseMaybeUnary (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:217:19)
-    at Parser.pp.parseExprOps (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:163:19)
-    at Parser.pp.parseMaybeConditional (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:145:19)
-    at Parser.pp.parseMaybeAssign (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:112:19)
-    at Parser.pp.parseExpression (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:79:19)
-    at s.AssetDB.error (C:\CocosCreator\resources\app.asar\asset-db\lib\utils.js:1:2582)
-    at Object.callback (C:\CocosCreator\resources\app.asar\asset-db\core\ipc.js:1:4288)
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:906:35
-    at _arrayEach (C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:85:13)
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:898:17
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:44:16
-    at s.<anonymous> (C:\CocosCreator\resources\app.asar\asset-db\index.js:1:1406)
-    at C:\CocosCreator\resources\app.asar\asset-db\lib\tasks.js:1:18991
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:52:16
-2016-08-04T07:45:52.686Z - error: Failed to update asset db://assets/Script/NetWork/EventProcess.js, messages: SyntaxError: unknown: Unexpected token (51:30)
-        WC_LOGIN: function(param) {
-            cc.log("登录返回：%d", param.error);
-            if(param.error == )
-        },
-        
-    },
-    at Parser.pp.raise (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\location.js:24:13)
-    at Parser.pp.unexpected (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\util.js:82:8)
-    at Parser.pp.parseExprAtom (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:425:12)
-    at Parser.parseExprAtom (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\plugins\jsx\index.js:412:22)
-    at Parser.pp.parseExprSubscripts (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:236:19)
-    at Parser.pp.parseMaybeUnary (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:217:19)
-    at Parser.pp.parseExprOp (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:188:42)
-    at Parser.pp.parseExprOps (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:167:17)
-    at Parser.pp.parseMaybeConditional (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:145:19)
-    at Parser.pp.parseMaybeAssign (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:112:19)
-    at s.AssetDB.error (C:\CocosCreator\resources\app.asar\asset-db\lib\utils.js:1:2582)
-    at Object.callback (C:\CocosCreator\resources\app.asar\asset-db\core\ipc.js:1:4288)
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:906:35
-    at _arrayEach (C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:85:13)
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:898:17
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:44:16
-    at s.<anonymous> (C:\CocosCreator\resources\app.asar\asset-db\index.js:1:1406)
-    at C:\CocosCreator\resources\app.asar\asset-db\lib\tasks.js:1:18991
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:52:16
-2016-08-04T07:51:38.581Z - normal: Compiled successfully
-2016-08-04T08:05:05.891Z - normal: Compiled successfully
-2016-08-04T08:05:25.349Z - normal: Compiled successfully
-2016-08-04T08:06:50.333Z - normal: Compiled successfully
-2016-08-04T08:07:20.920Z - normal: Compiled successfully
-2016-08-04T08:07:35.507Z - normal: Compiled successfully
-2016-08-04T08:09:03.795Z - normal: Compiled successfully
-2016-08-04T08:15:56.414Z - normal: Compiled successfully
-2016-08-04T08:18:34.221Z - normal: Compiled successfully
-2016-08-04T08:19:53.413Z - normal: Compiled successfully
-2016-08-04T08:20:26.497Z - normal: Compiled successfully
-2016-08-04T08:24:25.493Z - normal: Compiled successfully
-2016-08-04T08:33:56.793Z - normal: Compiled successfully
-2016-08-04T08:55:18.418Z - normal: Compiled successfully
-2016-08-04T09:44:47.766Z - normal: Compiled successfully
-2016-08-04T09:44:57.563Z - normal: Compiled successfully
-2016-08-04T09:46:14.383Z - normal: Compiled successfully
-2016-08-04T09:49:01.559Z - normal: Compiled successfully
-2016-08-04T10:02:08.620Z - normal: Compiled successfully
-2016-08-04T10:23:12.691Z - normal: Compiled successfully
-2016-08-04T10:23:16.438Z - normal: Compiled successfully
-2016-08-04T10:24:44.191Z - normal: Compiled successfully
-2016-08-04T10:25:48.716Z - normal: Compiled successfully
-2016-08-04T10:27:41.516Z - normal: Compiled successfully
-2016-08-04T10:29:16.455Z - normal: Compiled successfully
-2016-08-04T10:31:05.016Z - normal: Compiled successfully
-2016-08-04T10:32:05.568Z - normal: Compiled successfully
-2016-08-04T10:32:57.912Z - normal: Compiled successfully
-2016-08-04T10:39:08.709Z - normal: Compiled successfully
-2016-08-04T10:42:50.602Z - normal: Compiled successfully
-2016-08-04T10:43:13.585Z - normal: Compiled successfully
-2016-08-04T10:44:14.164Z - normal: Compiled successfully
-2016-08-04T10:44:31.048Z - normal: Compiled successfully
-2016-08-04T10:45:31.335Z - normal: Compiled successfully
-2016-08-04T10:47:01.687Z - normal: Compiled successfully
-2016-08-04T10:47:48.849Z - normal: Compiled successfully
-2016-08-04T10:50:31.192Z - normal: Compiled successfully
-2016-08-04T10:50:58.860Z - normal: Compiled successfully
+2016-08-05T08:11:02.591Z - normal: Load ~/.CocosCreator/settings.json
+2016-08-05T08:11:02.596Z - normal: checking language setting...
+2016-08-05T08:11:02.597Z - normal: Language: zh
+2016-08-05T08:11:03.661Z - success: protocol editor-framework registerred
+2016-08-05T08:11:03.661Z - success: protocol app registerred
+2016-08-05T08:11:03.661Z - success: protocol packages registerred
+2016-08-05T08:11:03.662Z - success: protocol unpack registerred
+2016-08-05T08:11:03.810Z - normal: connected!
+2016-08-05T08:11:03.813Z - normal: Check project C:\Users\bingogame\Documents\HELLO
+2016-08-05T08:11:03.816Z - normal: Initializing Cocos Creator Editor
+2016-08-05T08:11:04.088Z - normal: Initializing Cocos2d
+2016-08-05T08:11:04.220Z - normal: Initializing Asset Database
+2016-08-05T08:11:04.244Z - success: protocol uuid registerred
+2016-08-05T08:11:04.244Z - success: protocol uuid registerred
+2016-08-05T08:11:04.244Z - success: protocol thumbnail registerred
+2016-08-05T08:11:04.244Z - normal: Loading editor/builtin packages
+2016-08-05T08:11:04.352Z - success: assets loaded
+2016-08-05T08:11:04.354Z - success: builder loaded
+2016-08-05T08:11:04.358Z - success: hierarchy loaded
+2016-08-05T08:11:04.361Z - success: inspector loaded
+2016-08-05T08:11:04.362Z - success: keystore loaded
+2016-08-05T08:11:04.365Z - success: node-library loaded
+2016-08-05T08:11:04.368Z - success: preferences loaded
+2016-08-05T08:11:04.382Z - success: project-importer loaded
+2016-08-05T08:11:04.384Z - success: project-settings loaded
+2016-08-05T08:11:04.387Z - success: ui-kit loaded
+2016-08-05T08:11:04.388Z - success: ui-grid loaded
+2016-08-05T08:11:04.392Z - success: scene loaded
+2016-08-05T08:11:04.394Z - success: sprite-editor loaded
+2016-08-05T08:11:04.399Z - success: timeline loaded
+2016-08-05T08:11:04.400Z - success: ui-kit-extra loaded
+2016-08-05T08:11:04.401Z - normal: Loading builtin packages
+2016-08-05T08:11:04.403Z - success: asset-db-debugger loaded
+2016-08-05T08:11:04.405Z - success: code-editor loaded
+2016-08-05T08:11:04.405Z - success: color-picker loaded
+2016-08-05T08:11:04.408Z - success: console loaded
+2016-08-05T08:11:04.410Z - success: package-manager loaded
+2016-08-05T08:11:04.416Z - success: tester loaded
+2016-08-05T08:11:04.417Z - success: ui-tree loaded
+2016-08-05T08:11:04.450Z - normal: Initializing project C:\Users\bingogame\Documents\HELLO
+2016-08-05T08:11:04.510Z - normal: Loading packages
+2016-08-05T08:11:04.513Z - normal: Run Application
+2016-08-05T08:11:04.840Z - success: preview server running at http://localhost:7456
+2016-08-05T08:11:08.463Z - normal: 1.1.2
+2016-08-05T08:11:08.868Z - error: A Class already exists with the same __classname__ : "EventProcess".
+    at C:\CocosCreator\resources\engine\cocos2d\core\platform\js.js:252:24
+    at Object.js.setClassName (C:\CocosCreator\resources\engine\cocos2d\core\platform\js.js:282:9)
+    at doDefine (C:\CocosCreator\resources\engine\cocos2d\core\platform\CCClass.js:389:8)
+    at define (C:\CocosCreator\resources\engine\cocos2d\core\platform\CCClass.js:414:23)
+    at Object.CCClass [as Class] (C:\CocosCreator\resources\engine\cocos2d\core\platform\CCClass.js:821:11)
+    at Object.require.1 (assets/Script/Network/EventProcess.js:9)
+    at s (../../../../../../CocosCreator/resources/app.asar/node_modules/browser-pack/_prelude.js:1)
+    at file:///C:/Users/bingogame/Documents/HELLO/library/bundle.project.js?001:1:313
+    at Object.require.duel../NetWork/GameConn (assets/Script/duel.js:6)
+2016-08-05T08:11:08.868Z - error: A Class already exists with the same __cid__ : "a69b54BOwhM7Zqv84sN4tuP".
+    at Object._setClassId (C:\CocosCreator\resources\engine\cocos2d\core\platform\js.js:252:24)
+    at define (C:\CocosCreator\resources\engine\cocos2d\core\platform\CCClass.js:416:20)
+    at Object.CCClass [as Class] (C:\CocosCreator\resources\engine\cocos2d\core\platform\CCClass.js:821:11)
+    at Object.require.1 (assets/Script/Network/EventProcess.js:9)
+    at s (../../../../../../CocosCreator/resources/app.asar/node_modules/browser-pack/_prelude.js:1)
+    at file:///C:/Users/bingogame/Documents/HELLO/library/bundle.project.js?001:1:313
+    at Object.require.duel../NetWork/GameConn (assets/Script/duel.js:6)
+    at s (../../../../../../CocosCreator/resources/app.asar/node_modules/browser-pack/_prelude.js:1)
+    at e (../../../../../../CocosCreator/resources/app.asar/node_modules/browser-pack/_prelude.js:1)
+2016-08-05T08:14:41.386Z - normal: Compiled successfully
+2016-08-05T08:19:02.063Z - normal: Compiled successfully
+2016-08-05T08:19:08.513Z - normal: Compiled successfully
+2016-08-05T08:21:05.649Z - normal: Compiled successfully
+2016-08-05T08:21:30.610Z - normal: Compiled successfully
+2016-08-05T08:22:09.090Z - normal: Compiled successfully
+2016-08-05T08:22:16.329Z - normal: Compiled successfully
+2016-08-05T08:24:47.150Z - normal: Compiled successfully
+2016-08-05T08:26:07.780Z - normal: Compiled successfully
+2016-08-05T08:30:03.739Z - normal: Compiled successfully
+2016-08-05T08:31:49.442Z - normal: Compiled successfully
+2016-08-05T08:32:04.008Z - normal: Compiled successfully
+2016-08-05T10:19:49.625Z - normal: Compiled successfully
+2016-08-05T10:22:37.776Z - normal: Compiled successfully
+2016-08-05T10:23:45.440Z - normal: Compiled successfully
+2016-08-05T10:24:02.256Z - normal: Compiled successfully
+2016-08-05T10:24:10.494Z - normal: Compiled successfully
+2016-08-05T10:24:17.350Z - normal: Compiled successfully
+2016-08-05T10:28:52.221Z - info: shutdown preview server

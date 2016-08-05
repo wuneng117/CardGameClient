@@ -47,7 +47,7 @@ cc.Class({
 
     // },
 
-    addChatItem: function addChatItem(str) {
+    addChatItem: function addChatItem(str, color) {
         var content = this.content;
 
         var chatItem = cc.instantiate(this.itemPrefab);
@@ -59,13 +59,13 @@ cc.Class({
         //添加ITEM
         chatItem.setPosition(-content.width / 2 + 5, -content.height);
         content.addChild(chatItem);
-        cc.log('content height: %d', content.height);
-        cc.log('str:%s', str);
+        //cc.log('content height: %d', content.height);
         strLabel.getComponent('cc.Label').string = str; //写字
+        if (color) strLabel.color = color;
 
         //调整大小，刷新到最下面一页
         content.setContentSize(content.width, content.height + strLabel.height);
-        cc.log('content height: %d, strLabel position: %d', content.height, chatItem.getPositionY());
+        //cc.log('content height: %d, strLabel position: %d', content.height, chatItem.getPositionY());
         if (content.height > 200) this.scrollView.scrollToBottom();
     }
 });

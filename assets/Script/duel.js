@@ -2,6 +2,8 @@
 
 const Player = require('player');
 const ChatWnd = require('ChatWnd');
+var GameConn = require('./NetWork/GameConn');
+//var EventProcess = require('./Network/EventProcess');
 
 var tempDeck = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L'];
 cc.Class({
@@ -42,7 +44,7 @@ cc.Class({
         },
         
         turn: 0,    //当前双方总回合数
-        turnPhase: 0,   //行动状态
+        phaseState: 0,   //行动状态
         
         //状态相关
         enterTurnFunc: {
@@ -164,12 +166,17 @@ cc.Class({
     //回合结束（按钮调用）
     turnEnd_BtnEvent: function(event) {
         //不是MainPhase这个按钮不能按
-        if(this.turnPhase !== PHASE_MAIN_TURN)
+        if(this.phaseState !== PHASE_MAIN_TURN)
             return;
             
         this.changePhase(PHASE_END_TURN);
     },
-  
+    
+    addChatItem: function(message, color) {
+        this.chatWnd.addChatItem(message, color);
+        //this.chatWnd.addChatItem('[系统]:用户' + GameConn.getAccountName() + '进入了房间.', cc.Color.RED);
+    },
+    
     enterBeginTurn: function() {
         cc.log('is enter BeginTurn?');
         ++this.turn;
@@ -220,13 +227,13 @@ cc.Class({
     },
         
     changePhase: function(nextTurnType) {
-        if(this.turnPhase !== 0)
+        if(this.phaseState !== 0)
         {
-            this.leaveTurnFunc[this.turnPhase]();
+            this.leaveTurnFunc[this.phaseState]();
         }
         
         this.enterTurnFunc[nextTurnType]();
-        this.turnPhase = nextTurnType;
+        this.phaseState = nextTurnType;
     },
     
     // use this for initialization
@@ -250,11 +257,12 @@ cc.Class({
 
     start: function() {
         //this.startGame();
-        this.chatWnd.addChatItem('[玩家1]:HI，大家好');
+        EventProcess.setDuel(this);
+        GameConn.sendPacket(CW_ENTERROOM_REQUEST, {});  //用户进入房间请求
     },
     
     // called every frame, uncomment this function to activate update callback
     update: function (dt) {
-        //this.turnFunc[this.turnPhase]();
+        //this.turnFunc[this.phaseState]();
     },
 });

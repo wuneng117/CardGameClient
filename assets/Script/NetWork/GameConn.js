@@ -83,7 +83,7 @@ cc.Class({
             }
             
             cc.log("准备账号登录，账号为：%s, 密码：%s", account, password);
-            this.socket.emit(CW_LOGIN, {'AccountName': account, 'password': password});
+            this.socket.emit(CW_LOGIN_REQUEST, {'AccountName': account, 'password': password});
         },
         
         //登录成功
@@ -115,10 +115,17 @@ cc.Class({
             //如果在战斗中，进行一些其他处理
         },
 
-        
         //设置clientId
         setClientId: function(idx) {
             this.clientId = idx;  
+        },
+        
+        //获取账号名字
+        getAccountName: function() {
+            if(this.account)
+                return this.account.account;
+            else
+                return null;
         },
 
         

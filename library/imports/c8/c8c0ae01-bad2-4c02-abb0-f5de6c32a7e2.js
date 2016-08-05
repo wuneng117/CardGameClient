@@ -27,7 +27,7 @@ cc.Class({
         },
 
         duel: null, //战斗管理
-        _opponentPlayer: null, //对手player
+        //_opponentPlayer: null,  //对手player
         _isTurnActive: false, //是否可以行动
 
         heroName: '', //玩家名字

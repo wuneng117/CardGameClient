@@ -1,12 +1,17 @@
-window.PLAYER_SELF = 1;
-window.PLAYER_OPPONENT = 2;
+//回合阶段
+window.PHASE_NULL = 0;
 window.PHASE_BEGIN_TURN = 1;
 window.PHASE_MAIN_TURN = 2;
 window.PHASE_END_TURN = 3;
 
+//客户端与服务端通信函数
 window.WC_CONNECTED = 'WC_CONNECTED';
-window.CW_LOGIN = 'CW_LOGIN';
-window.WC_LOGIN = 'WC_LOGIN';
+window.CW_LOGIN_REQUEST = 'CW_LOGIN_REQUEST';
+window.WC_LOGIN_RESPONSE = 'WC_LOGIN_RESPONSE';
+window.CW_ENTERROOM_REQUEST = 'CW_ENTERROOM_REQUEST';
+window.WC_ENTERROOM_RESPONSE = 'WC_ENTERROOM_RESPONSE';
+window.CW_CHAT_ADD_REQUEST = 'CW_CHAT_ADD_REQUEST';
+window.WC_CHAT_ADD_RESPONSE = 'WC_CHAT_ADD_RESPONSE';
 
 window.showTipLabel = function showTipLabel(str, color) 
 {
