@@ -38,6 +38,8 @@ cc.Class({
             this.gameConn.registerHandler(WC_LOGIN_RESPONSE, this[WC_LOGIN_RESPONSE].bind(this));
             this.gameConn.registerHandler(WC_ENTERROOM_RESPONSE, this[WC_ENTERROOM_RESPONSE].bind(this));
             this.gameConn.registerHandler(WC_CHAT_ADD_RESPONSE, this[WC_CHAT_ADD_RESPONSE].bind(this));
+            this.gameConn.registerHandler(WC_CHAT_ADD, this[WC_CHAT_ADD].bind(this));
+            this.gameConn.registerHandler(WC_PLAYER_UPDATE, this[WC_PLAYER_UPDATE].bind(this));
         },
 
         //服务器断开连接
@@ -72,9 +74,21 @@ cc.Class({
             if (error == ERROR_ENTERROOM_INROOM) cc.log('您已经进入房间，不可再次进入');
         },
 
-        //添加聊天信息响应
-        WC_CHAT_ADD_RESPONSE: function WC_CHAT_ADD_RESPONSE(param) {
+        //添加聊天信息响应(以后写)
+        WC_CHAT_ADD_RESPONSE: function WC_CHAT_ADD_RESPONSE(param) {},
+
+        //服务端发送聊天信息
+        WC_CHAT_ADD: function WC_CHAT_ADD(param) {
             if (param.isSystem) this.duel.addChatItem(param.message, cc.Color.RED);else this.duel.addChatItem(param.message);
+        },
+
+        //Player更新
+        WC_PLAYER_UPDATE: function WC_PLAYER_UPDATE(param) {
+            var idx = param;
+            var player = this.duel.playerVec[idx];
+            if (!player) return;
+
+            player.unPackData(param);
         }
 
     }

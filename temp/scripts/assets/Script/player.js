@@ -102,6 +102,27 @@ cc.Class({
         this.refreshHandCard();
     },
 
+    //打包数据
+    packData: function packData(data, flag) {
+        data.flag = flag;
+        data.idx = this.idx;
+
+        if (flag & PLAYTER_UPDATE_ISTURNACTIVE) data.isTurnActive = this._isTurnActive;
+        if (flag & PLAYTER_UPDATE_HP) data.hp = this.hp;
+        if (flag & PLAYTER_UPDATE_CRITICAL) data.critical = this.critical;
+        if (flag & PLAYTER_UPDATE_MAXCRITICAL) data.maxCritical = this.maxCritical;
+    },
+
+    //解开数据
+    unPackData: function unPackData(data) {
+        var flag = data.flag;
+
+        if (flag & PLAYTER_UPDATE_ISTURNACTIVE) this._isTurnActive = data.isTurnActive;
+        if (flag & PLAYTER_UPDATE_HP) this.hp = data.hp;
+        if (flag & PLAYTER_UPDATE_CRITICAL) this.critical = data.critical;
+        if (flag & PLAYTER_UPDATE_MAXCRITICAL) this.maxCritical = data.maxCritical;
+    },
+
     //根据牌池随机创建卡组
     createDeck: function createDeck(cardArray) {
         var deckArray = this.deckArray;

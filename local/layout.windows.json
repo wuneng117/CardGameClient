@@ -2,8 +2,8 @@
   "version": "1.1.2",
   "windows": {
     "main": {
-      "x": -8,
-      "y": -8,
+      "x": 0,
+      "y": 2,
       "width": 1936,
       "height": 1056,
       "layout": {
