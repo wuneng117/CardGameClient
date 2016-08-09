@@ -2,10 +2,19 @@
 
 var Player = require('player');
 var ChatWnd = require('ChatWnd');
+var PlayerSprite = require('PlayerSprite');
 var GameConn = require('./NetWork/GameConn');
 //var EventProcess = require('./Network/EventProcess');
 
-var tempDeck = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+//对战状态
+var DUEL_STATE_REST = 0;
+var DUEL_STATE_PLAYING = 1;
+
+//分组
+var TEAM_COLOR_NONE = -1;
+var TEAM_COLOR_RED = 1;
+var TEAM_COLOR_BLUE = 2;
+
 cc.Class({
     'extends': cc.Component,
 
@@ -20,43 +29,24 @@ cc.Class({
         // },
         // ...
 
+        playerVec: [],
+        state: DUEL_STATE_REST,
+
+        turn: 0, //每个玩家一回合加一次
+        round: 0, //每个玩家都行动过一回合加一次
+
+        //-----------------------控件-------------------------------------------
         cardPrefab: {
             'default': null,
             type: cc.Prefab
         },
 
-        //自己
-        localPlayer: {
-            'default': null,
-            type: Player
-        },
-
-        //对手
-        opponentPlayer: {
-            'default': null,
-            type: Player
-        },
+        playerSpriteVec: [PlayerSprite], //玩家控件
 
         //聊天窗口脚本
         chatWnd: {
             'default': null,
             type: ChatWnd
-        },
-
-        turn: 0, //当前双方总回合数
-        phaseState: 0, //行动状态
-
-        //状态相关
-        enterTurnFunc: {
-            'default': []
-        },
-
-        turnFunc: {
-            'default': []
-        },
-
-        leaveTurnFunc: {
-            'default': []
         }
     },
 
@@ -66,6 +56,66 @@ cc.Class({
             cc.log('1231312321313213123');
             cc.log(event.getLocationX());
         }, this);
+    },
+
+    addPlayer: function addPlayer(param) {
+        var idx = param;
+        var player = this.duel.playerVec[idx];
+        //玩家数据已存在
+        if (player) {
+            cc.log('WC_PLAYER_ADD error! player(%d) is already exited.', idx);
+            return;
+        }
+
+        //创建玩家并加入玩家数组
+        createPlayer(param);
+
+        GameConn.sendPacket(CW_DUELREADY_REQUEST, {}); //直接准备
+    },
+
+    createPlayer: function createPlayer(param) {
+        var player = new Player();
+        player.init(this);
+        player.unpackDataAll(param);
+        this.playerVec[idx] = player;
+    },
+
+    getPlayer: function getPlayer(idx) {
+        return this.playerVec[idx];
+    },
+
+    getPlayerSprite: function getPlayerSprite(idx) {
+        return this.playerSpriteVec[idx];
+    },
+
+    refreshPlayerSprite: function refreshPlayerSprite(playerIdx) {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = this.playerSpriteVec[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var playerSprite = _step.value;
+
+                if (playerSprite.getIdx() === playerIdx) {
+                    playerSprite.refresh();
+                    break;
+                }
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator['return']) {
+                    _iterator['return']();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
     },
 
     //开始游戏
@@ -214,18 +264,31 @@ cc.Class({
     // use this for initialization
     onLoad: function onLoad() {
         //this.setInputControl();
-        //
-        this.enterTurnFunc[PHASE_BEGIN_TURN] = this.enterBeginTurn.bind(this);
-        this.enterTurnFunc[PHASE_MAIN_TURN] = this.enterMainTurn.bind(this);
-        this.enterTurnFunc[PHASE_END_TURN] = this.enterEndTurn.bind(this);
+        //初始化玩家控件
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
 
-        this.turnFunc[PHASE_BEGIN_TURN] = this.beginTurn.bind(this);
-        this.turnFunc[PHASE_MAIN_TURN] = this.mainTurn.bind(this);
-        this.turnFunc[PHASE_END_TURN] = this.endTurn.bind(this);
+        try {
+            for (var _iterator2 = this.playerSpriteVec[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var playerSprite = _step2.value;
 
-        this.leaveTurnFunc[PHASE_BEGIN_TURN] = this.leaveBeginTurn.bind(this);
-        this.leaveTurnFunc[PHASE_MAIN_TURN] = this.leaveMainTurn.bind(this);
-        this.leaveTurnFunc[PHASE_END_TURN] = this.leaveEndTurn.bind(this);
+                playerSprite.init(this);
+            }
+        } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion2 && _iterator2['return']) {
+                    _iterator2['return']();
+                }
+            } finally {
+                if (_didIteratorError2) {
+                    throw _iteratorError2;
+                }
+            }
+        }
     },
 
     start: function start() {

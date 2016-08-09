@@ -40,7 +40,7 @@
                 "docks": [
                   {
                     "active": 0,
-                    "height": 483,
+                    "height": 639,
                     "panels": [
                       "scene"
                     ],
@@ -49,7 +49,7 @@
                   },
                   {
                     "active": 0,
-                    "height": 483,
+                    "height": 639,
                     "panels": [
                       "node-library"
                     ],
@@ -57,14 +57,14 @@
                     "width": 430
                   }
                 ],
-                "height": 483,
+                "height": 639,
                 "row": true,
                 "type": "dock",
                 "width": 1408
               },
               {
                 "active": 0,
-                "height": 443,
+                "height": 287,
                 "panels": [
                   "console",
                   "timeline"

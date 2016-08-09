@@ -27,6 +27,10 @@ window.WC_PLAYER_ADD = 'WC_PLAYER_ADD'; //服务端向客户端发送PLAYER添�
 window.WC_PLAYER_ADD_OTHER = 'WC_PLAYER_ADD_OTHER'; //服务端向客户端发送PLAYER添加(别人)
 window.WC_PLAYER_UPDATE = 'WC_PLAYER_UPDATE'; //服务端向客户端发送PLAYER更新
 
+//房间
+window.CW_DUELREADY_REQUEST = 'CW_DUELREADY_REQUEST'; //客户端向服务端发送准备开始游戏请求
+window.WC_DUELREADY_RESPONSE = 'WC_DUELREADY_RESPONSE'; //服务端向客户端发送准备开始游戏响应
+window.WC_DUELREADY = 'WC_DUELREADY'; //服务端给客户端发送用户准备
 window.showTipLabel = function showTipLabel(str, color) {
     //文字标签创建
     var node = new cc.Node();

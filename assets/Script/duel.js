@@ -2,10 +2,19 @@
 
 const Player = require('player');
 const ChatWnd = require('ChatWnd');
+const PlayerSprite = require('PlayerSprite');
 var GameConn = require('./NetWork/GameConn');
 //var EventProcess = require('./Network/EventProcess');
 
-var tempDeck = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L'];
+//对战状态
+var DUEL_STATE_REST = 0;
+var DUEL_STATE_PLAYING = 1;
+
+//分组
+var TEAM_COLOR_NONE = -1;
+var TEAM_COLOR_RED = 1;
+var TEAM_COLOR_BLUE = 2;
+
 cc.Class({
     extends: cc.Component,
 
@@ -20,43 +29,24 @@ cc.Class({
         // },
         // ...
         
+        playerVec: [],
+        state : DUEL_STATE_REST,
+        
+        turn: 0,            //每个玩家一回合加一次
+        round: 0,           //每个玩家都行动过一回合加一次
+
+        //-----------------------控件-------------------------------------------
         cardPrefab: {
             default: null,
             type: cc.Prefab
         },
-
-        //自己
-        localPlayer: {
-            default: null,
-            type: Player
-        },
         
-        //对手
-        opponentPlayer: {
-            default: null,
-            type: Player
-        },
+        playerSpriteVec: [PlayerSprite],    //玩家控件
 
         //聊天窗口脚本
         chatWnd: {
             default: null,
             type: ChatWnd
-        },
-        
-        turn: 0,    //当前双方总回合数
-        phaseState: 0,   //行动状态
-        
-        //状态相关
-        enterTurnFunc: {
-            default: []
-        },
-        
-        turnFunc: {
-            default: []
-        },
-        
-        leaveTurnFunc: {
-            default: []
         },
     },
     
@@ -67,6 +57,48 @@ cc.Class({
             cc.log(event.getLocationX());
         }, this);
 
+    },
+    
+    addPlayer: function(param) {
+        var idx = param;
+        var player = this.duel.playerVec[idx];
+        //玩家数据已存在
+        if(player)
+        {
+            cc.log('WC_PLAYER_ADD error! player(%d) is already exited.', idx);
+            return;
+        }
+        
+        //创建玩家并加入玩家数组
+        createPlayer(param);
+        
+        GameConn.sendPacket(CW_DUELREADY_REQUEST, {});  //直接准备
+    },
+    
+    createPlayer: function(param) {
+        var player = new Player();
+        player.init(this);
+        player.unpackDataAll(param);
+        this.playerVec[idx] = player;
+    },
+    
+    getPlayer: function(idx) {
+        return this.playerVec[idx];    
+    },
+    
+    getPlayerSprite: function(idx) {
+        return this.playerSpriteVec[idx];    
+    },
+    
+    refreshPlayerSprite: function(playerIdx) {
+        for(var playerSprite of this.playerSpriteVec)    
+        {
+            if(playerSprite.getIdx() === playerIdx)
+            {
+                playerSprite.refresh();
+                break;
+            }
+        }
     },
     
     //开始游戏
@@ -239,20 +271,11 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         //this.setInputControl();
-        //
-        this.enterTurnFunc[PHASE_BEGIN_TURN] = this.enterBeginTurn.bind(this);
-        this.enterTurnFunc[PHASE_MAIN_TURN] = this.enterMainTurn.bind(this);
-        this.enterTurnFunc[PHASE_END_TURN] = this.enterEndTurn.bind(this);
-
-        this.turnFunc[PHASE_BEGIN_TURN] = this.beginTurn.bind(this);
-        this.turnFunc[PHASE_MAIN_TURN] = this.mainTurn.bind(this);
-        this.turnFunc[PHASE_END_TURN] = this.endTurn.bind(this);
-        
-        this.leaveTurnFunc[PHASE_BEGIN_TURN] = this.leaveBeginTurn.bind(this);
-        this.leaveTurnFunc[PHASE_MAIN_TURN] = this.leaveMainTurn.bind(this);
-        this.leaveTurnFunc[PHASE_END_TURN] = this.leaveEndTurn.bind(this);
-        
-
+        //初始化玩家控件
+        for(var playerSprite of this.playerSpriteVec)
+        {
+            playerSprite.init(this);
+        }
     },
 
     start: function() {

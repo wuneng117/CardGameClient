@@ -6,6 +6,12 @@ var Card = require('card');
 var Monster = require('monster');
 var CardDataManager = require('./data/CardDataManager');
 
+var PLAYER_UPDATE_ISTURNACTIVE = 1;
+var PLAYER_UPDATE_HP = 1 << 1;
+var PLAYER_UPDATE_CRITICAL = 1 << 2;
+var PLAYER_UPDATE_MAXCRITICAL = 1 << 3;
+var PLAYER_UPDATE_ISREADY = 1 << 4;
+
 cc.Class({
     'extends': cc.Component,
 
@@ -31,75 +37,47 @@ cc.Class({
         },
 
         duel: null, //战斗管理
-        //_opponentPlayer: null,  //对手player
-        _isTurnActive: false, //是否可以行动
+        idx: -1,
+        teamColor: -1,
+        isTurnActive: false, //是否可以行动
+        isReady: false, //是否准备游戏
 
         heroName: '', //玩家名字
         hp: 30, //英雄生命值
         critical: 0, //英雄当前水晶数
         maxCritical: 0, //英雄当前回合最大水晶数
-        //handCard: 0,   
+
         deckArray: [], //卡组数组（Card类型）
         handArray: [], //手牌数组（Card类型）
-        fieldArray: [], //场上随从数组（CardMonster类型）
-        handCardSpriteArray: [], //手牌图片数组
-        monsterSpriteArray: [], //随从图片数组
+        fieldArray: [] },
 
-        //---------------------节点池管理---------------------------------------
-        cardPool: null,
-        monsterPool: null,
-
-        //-----------------------控件-------------------------------------------
-        //手牌区
-        handFiledLayout: {
-            'default': null,
-            type: cc.Layout
-        },
-
-        //场上随从区
-        monsterFieldLayout: {
-            'default': null,
-            type: cc.Node
-        },
-
-        //头像
-        heroIconSprite: {
-            'default': null,
-            type: cc.Sprite
-        },
-
-        //血量显示
-        heroHpLabel: {
-            'default': null,
-            type: cc.Label
-        },
-
-        //水晶
-        criticalSpriteArray: [cc.Sprite],
-
-        //卡组牌数
-        deckLabel: {
-            'default': null,
-            type: cc.Label
-        }
-
-    },
-
+    //场上随从数组（Monster类型）
     init: function init(duel) {
         this.duel = duel;
-        this.hp = 30;
-        this.critical = 0;
-        this.maxCritical = 0;
-        this.deckArray = [];
-        this.handArray = [];
-        this.fieldArray = [];
-        for (var i = 0; i < this.handCardSpriteArray.length; ++i) {
-            //this.handCardSpriteArray[i].destory();
-            this.cardPool.put(this.handCardSpriteArray[i]);
-        }
+    },
 
-        this.refreshcriticalsprite();
-        this.refreshHandCard();
+    //打包数据完整
+    packDataAll: function packDataAll(data) {
+        data.idx = this.idx;
+        data.temColor = this.teamColor;
+        data.isTurnActive = this.isTurnActive;
+        data.isReady = this.isReady;
+        data.heroName = this.heroName;
+        data.hp = this.hp;
+        data.critical = this.crititcal;
+        data.maxCritical = this.maxCritical;
+    },
+
+    //解开数据完整
+    unPackDataAll: function unPackDataAll(data) {
+        this.idx = data.idx;
+        this.teamColor = data.temColor;
+        this.isTurnActive = data.isTurnActive;
+        this.isReady = data.isReady;
+        this.heroName = data.heroName;
+        this.hp = data.hp;
+        this.crititcal = data.critical;
+        this.maxCritical = data.maxCritical;
     },
 
     //打包数据
@@ -107,20 +85,21 @@ cc.Class({
         data.flag = flag;
         data.idx = this.idx;
 
-        if (flag & PLAYTER_UPDATE_ISTURNACTIVE) data.isTurnActive = this._isTurnActive;
-        if (flag & PLAYTER_UPDATE_HP) data.hp = this.hp;
-        if (flag & PLAYTER_UPDATE_CRITICAL) data.critical = this.critical;
-        if (flag & PLAYTER_UPDATE_MAXCRITICAL) data.maxCritical = this.maxCritical;
+        if (flag & PLAYER_UPDATE_ISTURNACTIVE) data.isTurnActive = this._isTurnActive;
+        if (flag & PLAYER_UPDATE_HP) data.hp = this.hp;
+        if (flag & PLAYER_UPDATE_CRITICAL) data.critical = this.critical;
+        if (flag & PLAYER_UPDATE_MAXCRITICAL) data.maxCritical = this.maxCritical;
+        if (flag & PLAYER_UPDATE_ISREADY) data.isReady = this.isReady;
     },
 
     //解开数据
     unPackData: function unPackData(data) {
         var flag = data.flag;
 
-        if (flag & PLAYTER_UPDATE_ISTURNACTIVE) this._isTurnActive = data.isTurnActive;
-        if (flag & PLAYTER_UPDATE_HP) this.hp = data.hp;
-        if (flag & PLAYTER_UPDATE_CRITICAL) this.critical = data.critical;
-        if (flag & PLAYTER_UPDATE_MAXCRITICAL) this.maxCritical = data.maxCritical;
+        if (flag & PLAYER_UPDATE_ISTURNACTIVE) this._isTurnActive = data.isTurnActive;
+        if (flag & PLAYER_UPDATE_HP) this.hp = data.hp;
+        if (flag & PLAYER_UPDATE_CRITICAL) this.critical = data.critical;
+        if (flag & PLAYER_UPDATE_ISREADY) this.isReady = data.isReady;
     },
 
     //根据牌池随机创建卡组
@@ -341,34 +320,8 @@ cc.Class({
         }
     },
 
-    //水晶图片刷新
-    refreshcriticalsprite: function refreshcriticalsprite() {
-        var criticalSpriteArray = this.criticalSpriteArray;
-        var i = 0;
-        for (; i < this.critical; ++i) {
-            criticalSpriteArray[i].setVisible(1);
-            criticalSpriteArray[i].node.color = new cc.Color(0, 255, 0);
-        }
-        for (; i < this.maxCritical; ++i) {
-            criticalSpriteArray[i].setVisible(1);
-            criticalSpriteArray[i].node.color = new cc.Color(255, 0, 0);
-        }
-        for (; i < criticalSpriteArray.length; ++i) {
-            criticalSpriteArray[i].setVisible(0);
-        }
-    },
-
-    refreshHpLabel: function refreshHpLabel() {
-        this.heroHpLabel.string = this.hp.toString();
-    },
-
     // use this for initialization
-    onLoad: function onLoad() {
-        this.cardPool = new cc.NodePool('card');
-        //cc.log('this.cardPool type');
-        //cc.log(this.cardPool);
-        this.monsterPool = new cc.NodePool('monster');
-    }
+    onLoad: function onLoad() {}
 
 });
 // called every frame, uncomment this function to activate update callback
