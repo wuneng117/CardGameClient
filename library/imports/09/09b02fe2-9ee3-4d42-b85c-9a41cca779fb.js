@@ -67,16 +67,17 @@ cc.Class({
 
             var boundBox = this._player.monsterFieldLayout.getBoundingBox();
             var pos = new cc.v2(this.node.x + this.node.parent.x, this.node.y + this.node.parent.y);
-            if (!boundBox.contains(pos) || !this._player.summerMonster(this)) {
-                //cc.log('summer monster error!')
-                this.node.setPosition(this.srcPos.x, this.srcPos.y);
+            if (boundBox.contains(pos)) {
+                this._player.summerMonster(this._idx);
             }
+
+            this.node.setPosition(this.srcPos.x, this.srcPos.y);
         }, this);
     },
 
     //是否激活
     isTurnActive: function isTurnActive() {
-        return this._player._isTurnActive;
+        return this._player.getIsTurnActive();
     },
 
     // use this for initialization
@@ -87,11 +88,17 @@ cc.Class({
     },
 
     init: function init(card, player, idx) {
-
-        this.hpLabel.string = card.hp.toString();
-        this.criticalLabel.string = card.critical.toString();
-        this.atkLabel.string = card.atk.toString();
-        this.nameLabel.string = card.cardName.toString();
+        if (card.isHide) {
+            this.hpLabel.string = '??';
+            this.criticalLabel.string = '??';
+            this.atkLabel.string = '??';
+            this.nameLabel.string = '??';
+        } else {
+            this.hpLabel.string = card.hp.toString();
+            this.criticalLabel.string = card.critical.toString();
+            this.atkLabel.string = card.atk.toString();
+            this.nameLabel.string = card.cardName.toString();
+        }
 
         this._player = player;
         this._idx = idx;

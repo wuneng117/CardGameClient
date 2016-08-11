@@ -7,6 +7,7 @@ var PLAYER_UPDATE_HP = 1 << 1;
 var PLAYER_UPDATE_CRITICAL = 1 << 2;
 var PLAYER_UPDATE_MAXCRITICAL = 1 << 3;
 var PLAYER_UPDATE_ISREADY = 1 << 4;
+var PLAYER_UPDATE_DECKNUM = 1 << 5;
 
 cc.Class({
     'extends': cc.Component,
@@ -22,16 +23,6 @@ cc.Class({
         // },
         // ...
 
-        cardPrefab: {
-            'default': null,
-            type: cc.Prefab
-        },
-
-        monsterPrefab: {
-            'default': null,
-            type: cc.Prefab
-        },
-
         duel: null, //战斗管理
         idx: -1,
         teamColor: -1,
@@ -42,7 +33,7 @@ cc.Class({
         hp: 30, //英雄生命值
         critical: 0, //英雄当前水晶数
         maxCritical: 0, //英雄当前回合最大水晶数
-
+        deckNum: 30, //牌组剩余卡牌
         deckArray: [], //卡组数组（Card类型）
         handArray: [], //手牌数组（Card类型）
         fieldArray: [] },
@@ -62,6 +53,7 @@ cc.Class({
         data.hp = this.hp;
         data.critical = this.crititcal;
         data.maxCritical = this.maxCritical;
+        data.deckNum = this.deckNum;
     },
 
     //解开数据完整
@@ -74,6 +66,7 @@ cc.Class({
         this.hp = data.hp;
         this.crititcal = data.critical;
         this.maxCritical = data.maxCritical;
+        this.deckNum = data.deckNum;
     },
 
     //打包数据
@@ -86,6 +79,7 @@ cc.Class({
         if (flag & PLAYER_UPDATE_CRITICAL) data.critical = this.critical;
         if (flag & PLAYER_UPDATE_MAXCRITICAL) data.maxCritical = this.maxCritical;
         if (flag & PLAYER_UPDATE_ISREADY) data.isReady = this.isReady;
+        if (flag & PLAYER_UPDATE_DECKNUM) data.deckNum = this.deckNum;
     },
 
     //解开数据
@@ -96,38 +90,53 @@ cc.Class({
         if (flag & PLAYER_UPDATE_HP) this.hp = data.hp;
         if (flag & PLAYER_UPDATE_CRITICAL) this.critical = data.critical;
         if (flag & PLAYER_UPDATE_ISREADY) this.isReady = data.isReady;
+        if (flag & PLAYER_UPDATE_DECKNUM) this.deckNum = data.deckNum;
     },
 
-    //根据牌池随机创建卡组
-    createDeck: function createDeck(cardArray) {
-        var deckArray = this.deckArray;
-
-        for (var i = 0; i < 30; ++i) {
-            deckArray[i] = new Card();
-            var randomKey = cardArray[Math.floor(Math.random() * cardArray.length)];
-            var cardData = CardDataManager.cardMap[randomKey];
-            deckArray[i].init(cardData, this, i);
-        }
+    getIsTurnActive: function getIsTurnActive() {
+        return this.isTurnActive;
+    },
+    getHeroName: function getHeroName() {
+        return this.heroName;
+    },
+    getHp: function getHp() {
+        return this.hp;
+    },
+    getCritical: function getCritical() {
+        return this.critical;
+    },
+    getMaxCritical: function getMaxCritical() {
+        return this.maxCritical;
+    },
+    getDeckNum: function getDeckNum() {
+        return this.deckNum;
     },
 
-    //设置是否可以行动
-    setTurnActive: function setTurnActive(val) {
-        this._isTurnActive = val;
+    //创建手牌
+    createCardToHand: function createCardToHand(data) {
+        var card = new Card();
+        card.unPackDataAll(data);
+        this.handArray.push(card);
+
+        var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
+        playerSprite.createCardsprite(card);
     },
 
-    //水晶回复
-    criticalRecover: function criticalRecover() {
-        this.critical = this.maxCritical;
-        this.refreshcriticalsprite(); //刷新水晶图片
+    //删除手牌
+    handCardDelete: function handCardDelete(idx) {
+        this.handArray.splice(idx, 1);
+
+        var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
+        playerSprite.deleteCardSprite(idx);
     },
 
-    //水晶增加
-    criticalPlus: function criticalPlus(num) {
-        this.maxCritical += num;
-        this.critical += num;
-        if (this.maxCritical > 10) this.maxCritical = 10;
-        if (this.critical > 10) this.critical = 10;
-        this.refreshcriticalsprite(); //刷新水晶图片
+    //刷新手牌
+    handCardUpdate: function handCardUpdate(data) {
+        var card = this.handArray[data.idx];
+        card.unPackData(data);
+
+        var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
+        playerSprite.refreshHandCard();
     },
 
     //重置随从攻击次数
@@ -141,113 +150,36 @@ cc.Class({
         this.refreshMonsterField();
     },
 
-    //扣除HP
-    reduceHp: function reduceHp(num) {
-        if (num <= 0) return;
-
-        this.hp -= num;
-        this.refreshHpLabel();
+    //召唤随从请求
+    summerMonster: function summerMonster(cardIdx) {
+        this.duel.summerMonster(cardIdx);
     },
 
-    //回复HP
-    addHp: function addHp(num) {
-        if (num <= 0) return;
+    //创建随从
+    createMonster: function createMonster(data) {
+        var monster = new Monster();
+        monster.unPackDataAll(data);
+        this.fieldArray.push(monster);
 
-        this.hp += num;
-        if (this.hp > 30) this.hp = 30;
-
-        this.refreshHpLabel();
+        var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
+        playerSprite.createMonstersprite(monster);
     },
 
-    //创建手牌
-    createCardToHand: function createCardToHand(card) {
-        //超过10张就爆炸
-        if (this.handArray.length >= 10) {
-            showTipLabel("手牌超出10张，抽的牌直接摧毁");
-            return;
-        }
+    //删除随从
+    monsterDelete: function monsterDelete(idx) {
+        this.fieldArray.splice(idx, 1);
 
-        //改变序号，加入手牌数组
-        card._idx = this.handArray.length;
-        this.handArray.push(card);
-
-        var cardSprite;
-        if (this.cardPool.size() > 0) {
-            cardSprite = this.cardPool.get(this);
-        } else {
-            cardSprite = cc.instantiate(this.cardPrefab);
-        }
-
-        this.handFiledLayout.node.addChild(cardSprite);
-        this.handCardSpriteArray.push(cardSprite);
-        this.refreshHandCard(); //刷新手牌图片
+        var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
+        playerSprite.deleteMonsterSprite(idx);
     },
 
-    //抽牌
-    drawDeck: function drawDeck(num) {
-        var deckArray = this.deckArray;
+    //刷新随从
+    handCardUpdate: function handCardUpdate(data) {
+        var monster = this.fieldArray[data.idx];
+        monster.unPackData(data);
 
-        if (deckArray.length > 0) {
-            var card = deckArray.pop();
-            this.deckLabel.string = deckArray.length.toString();
-            this.createCardToHand(card);
-        } else {
-            this.reduceHp(1);
-            showTipLabel(this.heroName + " 的牌库没牌了，抽1张少1HP");
-        }
-
-        if (num <= 1) {
-            this.duel.checkWin();
-        } else {
-            this.drawDeck(num - 1);
-        }
-    },
-
-    //召唤随从
-    summerMonster: function summerMonster(cardSprite) {
-        //如果随从已满返回
-        if (this.fieldArray.length > 7) return false;
-
-        var idx = cardSprite._idx;
-        var card = this.handArray[idx]; //获取卡牌对象
-        if (card) {
-            var critical = card.critical;
-            //如果水晶不够返回
-            if (critical > this.critical) {
-                showTipLabel(this.heroName + " 只有 " + this.critical + ' 个水晶,不能召唤费用为' + critical + ' 的 ' + card.cardName + ' 到场上');
-                return false;
-            }
-
-            this.critical -= critical;
-            this.refreshcriticalsprite();
-
-            //创建随从对象并加入随从数组
-            var monster = new Monster();
-            monster.init(card, this, this.fieldArray.length);
-            this.fieldArray.push(monster);
-
-            //创建随从图片资源
-            var monsterSprite;
-            if (this.monsterPool.size() > 0) {
-                monsterSprite = this.monsterPool.get(this);
-            } else {
-                monsterSprite = cc.instantiate(this.monsterPrefab);
-            }
-
-            this.monsterFieldLayout.addChild(monsterSprite);
-            this.monsterSpriteArray.push(monsterSprite);
-            this.refreshMonsterField(); //刷新随从区
-            //删除手牌
-            this.cardPool.put(cardSprite.node);
-            this.handArray.splice(idx, 1);
-            this.refreshArrayIdx(this.handArray);
-            //cc.log('after summer monster, the handarray.length is %d',this.handArray.length);
-            this.handCardSpriteArray.splice(idx, 1);
-            this.refreshHandCard();
-            showTipLabel(this.heroName + " 从手牌召唤了1张 " + card.cardName + ' 到场上');
-        } else {
-            return false;
-        }
+        var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
+        playerSprite.refreshMonsterField();
     },
 
     //干掉随从
@@ -274,46 +206,9 @@ cc.Class({
         }
     },
 
-    //-----------------------界面刷新---------------------------------------
-    //手牌图片刷新
-    refreshHandCard: function refreshHandCard() {
-        var handArray = this.handArray;
-        var handCardSpriteArray = this.handCardSpriteArray;
-        var arrayLength = handArray.length;
-
-        for (var i = 0; i < arrayLength; ++i) {
-            if (handCardSpriteArray[i]) {
-                handCardSpriteArray[i].getComponent('CardSprite').init(handArray[i], this, i);
-                handCardSpriteArray[i].setPosition(90 * i + handCardSpriteArray[i].getChildByName('sprite').width / 2 - this.handFiledLayout.node.width / 2, 0);
-                //cc.log(handCardSpriteArray[i].getChildByName('sprite').width);
-                //cc.log(this.handFiledLayout.node.width);
-                //handCardSpriteArray[i].setPosition(0,0);
-            } else {
-                    cc.log('handCardSpriteArray is less than handArray! %d/%d', i, arrayLength);
-                    break;
-                }
-        }
-    },
-
-    //随从图片刷新
-    refreshMonsterField: function refreshMonsterField() {
-        var fieldArray = this.fieldArray;
-        var monsterSpriteArray = this.monsterSpriteArray;
-        var arrayLength = fieldArray.length;
-
-        for (var i = 0; i < arrayLength; ++i) {
-            if (monsterSpriteArray[i]) {
-                monsterSpriteArray[i].getComponent('MonsterSprite').init(fieldArray[i], this, i);
-                monsterSpriteArray[i].setPosition(110 * i + monsterSpriteArray[i].width / 2 - this.monsterFieldLayout.width / 2, 0);
-                //cc.log(monsterSpriteArray[i].width);
-                //cc.log(this.monsterFieldLayout.node.width);
-                //monsterSpriteArray[i].setPosition(0,0);
-                if (fieldArray[i].isAtked) monsterSpriteArray[i].opacity = 100;else monsterSpriteArray[i].opacity = 255;
-            } else {
-                cc.log('monsterSpriteArray is less than fieldArray! %d/%d', i, arrayLength);
-                break;
-            }
-        }
+    //获取手牌
+    getHandCard: function getHandCard(idx) {
+        return this.handArray[idx];
     },
 
     // use this for initialization

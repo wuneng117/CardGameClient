@@ -44,6 +44,12 @@ cc.Class({
             this.gameConn.registerHandler(WC_PLAYER_UPDATE, this[WC_PLAYER_UPDATE].bind(this));
             this.gameConn.registerHandler(WC_DUELREADY_RESPONSE, this[WC_DUELREADY_RESPONSE].bind(this));
             this.gameConn.registerHandler(WC_DUELREADY, this[WC_DUELREADY].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_CREATE, this[WC_HANDCARD_CREATE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_UPDATE, this[WC_HANDCARD_UPDATE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_DELETE, this[WC_HANDCARD_DELETE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_CREATE, this[WC_MONSTER_CREATE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_UPDATE, this[WC_MONSTER_UPDATE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_DELETE, this[WC_MONSTER_DELETE].bind(this));
         },
 
         //服务器断开连接
@@ -77,6 +83,7 @@ cc.Class({
             var error = param.error;
             if (error == ERROR_ENTERROOM_INROOM) cc.log('您已经进入房间，不可再次进入');else if (error === ERROR_NOERROR) {
                 cc.log('成功进入房间');
+                this.gameConn.sendPacket(CW_DUELREADY_REQUEST, {}); //直接准备
             }
         },
 
@@ -101,6 +108,8 @@ cc.Class({
             if (!player) return;
 
             player.unPackData(param);
+            var playerSprite = this.duel.getPlayerSpriteByPlayer(idx);
+            playerSprite.refresh();
         },
 
         //准备游戏响应
@@ -141,7 +150,50 @@ cc.Class({
             }
 
             duel.refreshPlayerSprite(idx);
+        },
+
+        WC_HANDCARD_CREATE: function WC_HANDCARD_CREATE(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+
+            player.createCardToHand(param.param);
+        },
+
+        WC_HANDCARD_UPDATE: function WC_HANDCARD_UPDATE(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            var idx = param.idx;
+            player.handCardUpdate(idx);
+        },
+
+        WC_HANDCARD_DELETE: function WC_HANDCARD_DELETE(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            var idx = param.idx;
+            player.handCardDelete(idx);
+        },
+
+        WC_MONSTER_CREATE: function WC_MONSTER_CREATE(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+
+            player.createMonster(param.param);
+        },
+
+        WC_MONSTER_UPDATE: function WC_MONSTER_UPDATE(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            var idx = param.idx;
+            player.monsterUpdate(idx);
+        },
+
+        WC_MONSTER_DELETE: function WC_MONSTER_DELETE(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            var idx = param.idx;
+            player.monsterDelete(idx);
         }
+
     }
 
 });

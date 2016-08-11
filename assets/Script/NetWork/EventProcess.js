@@ -42,6 +42,12 @@ cc.Class({
             this.gameConn.registerHandler(WC_PLAYER_UPDATE, this[WC_PLAYER_UPDATE].bind(this));
             this.gameConn.registerHandler(WC_DUELREADY_RESPONSE, this[WC_DUELREADY_RESPONSE].bind(this));
             this.gameConn.registerHandler(WC_DUELREADY, this[WC_DUELREADY].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_CREATE, this[WC_HANDCARD_CREATE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_UPDATE, this[WC_HANDCARD_UPDATE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_DELETE, this[WC_HANDCARD_DELETE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_CREATE, this[WC_MONSTER_CREATE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_UPDATE, this[WC_MONSTER_UPDATE].bind(this));
+            this.gameConn.registerHandler(WC_HANDCARD_DELETE, this[WC_MONSTER_DELETE].bind(this));
              
         },
         
@@ -86,6 +92,7 @@ cc.Class({
             else if(error === ERROR_NOERROR)
             {
                 cc.log('成功进入房间');
+                this.gameConn.sendPacket(CW_DUELREADY_REQUEST, {});  //直接准备
             }
         },
         
@@ -115,6 +122,8 @@ cc.Class({
                 return;
             
             player.unPackData(param);
+            var playerSprite = this.duel.getPlayerSpriteByPlayer(idx);
+            playerSprite.refresh();
         },
         
          
@@ -165,6 +174,49 @@ cc.Class({
             
             duel.refreshPlayerSprite(idx);
         },
+        
+        WC_HANDCARD_CREATE: function(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            
+            player.createCardToHand(param.param);
+        },
+        
+        WC_HANDCARD_UPDATE: function(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            var idx = param.idx;
+            player.handCardUpdate(idx);
+        },
+        
+        WC_HANDCARD_DELETE: function(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            var idx = param.idx;
+            player.handCardDelete(idx);
+        },
+        
+        WC_MONSTER_CREATE: function(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            
+            player.createMonster(param.param);
+        },
+        
+        WC_MONSTER_UPDATE: function(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            var idx = param.idx;
+            player.monsterUpdate(idx);
+        },
+        
+        WC_MONSTER_DELETE: function(param) {
+            var playerIdx = param.playerIdx;
+            var player = this.duel.getPlayer(playerIdx);
+            var idx = param.idx;
+            player.monsterDelete(idx);
+        },
+
     },
     
 

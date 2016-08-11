@@ -2,6 +2,13 @@
 cc._RFpush(module, '97b2cKHFm5Aw7y0vU8kdrYO', 'monster');
 // Script\monster.js
 
+var MONSTER_UPDATE_CARDNAME = 1 << 1;
+var MONSTER_UPDATE_CRITICAL = 1 << 2;
+var MONSTER_UPDATE_ATK = 1 << 3;
+var MONSTER_UPDATE_HP = 1 << 4;
+var MONSTER_UPDATE_MAXHP = 1 << 5;
+var MONSTER_UPDATE_ISATKED = 1 << 6;
+
 cc.Class({
     "extends": cc.Component,
 
@@ -26,6 +33,56 @@ cc.Class({
         isAtked: true },
 
     //本回合是否攻击过
+    //打包数据完整
+    packDataAll: function packDataAll(data) {
+        data.idx = this.idx;
+
+        data.cardName = this.cardName;
+        data.critical = this.critical;
+        data.atk = this.atk;
+        data.hp = this.hp;
+        data.maxHp = this.maxHp;
+        data.isAtked = this.isAtked;
+    },
+
+    //解开数据完整
+    unPackDataAll: function unPackDataAll(data) {
+        this.idx = data.idx;
+
+        this.cardName = data.cardName;
+        this.critical = data.critical;
+        this.atk = data.atk;
+        this.hp = data.hp;
+        this.maxHp = data.maxHp;
+        this.isAtked = data.isAtked;
+    },
+
+    //打包数据
+    packData: function packData(data, flag) {
+        data.flag = flag;
+        data.idx = this.idx;
+
+        if (flag & MONSTER_UPDATE_CARDNAME) data.cardName = this.cardName;
+        if (flag & MONSTER_UPDATE_CRITICAL) data.critical = this.critical;
+        if (flag & MONSTER_UPDATE_ATK) data.atk = this.atk;
+        if (flag & MONSTER_UPDATE_HP) data.hp = this.hp;
+        if (flag & MONSTER_UPDATE_MAXHP) data.maxHp = this.maxHp;
+        if (flag & MONSTER_UPDATE_ISATKED) data.isAtked = this.isAtked;
+    },
+
+    //解开数据
+    unPackData: function unPackData(data) {
+        var flag = data.flag;
+        this.idx = data.idx;
+
+        if (flag & MONSTER_UPDATE_CARDNAME) this.cardName = data.cardName;
+        if (flag & MONSTER_UPDATE_CRITICAL) this.critical = data.critical;
+        if (flag & MONSTER_UPDATE_ATK) this.atk = data.atk;
+        if (flag & MONSTER_UPDATE_HP) this.hp = data.hp;
+        if (flag & MONSTER_UPDATE_MAXHP) this.maxHp = data.maxHp;
+        if (flag & MONSTER_UPDATE_ISATKED) this.isAtked = data.isAtked;
+    },
+
     //扣除HP
     reduceHp: function reduceHp(num) {
         if (num <= 0) return;

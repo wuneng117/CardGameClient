@@ -71,8 +71,6 @@ cc.Class({
         
         //创建玩家并加入玩家数组
         createPlayer(param);
-        
-        GameConn.sendPacket(CW_DUELREADY_REQUEST, {});  //直接准备
     },
     
     createPlayer: function(param) {
@@ -90,6 +88,16 @@ cc.Class({
         return this.playerSpriteVec[idx];    
     },
     
+    getPlayerSpriteByPlayer: function(idx) {
+        for(var playerSprite of this.playerSpriteVec)
+        {
+            if(playerSprite.getIdx() === idx)
+                return playerSprite;
+        }
+        
+        return null;    
+    },
+    
     refreshPlayerSprite: function(playerIdx) {
         for(var playerSprite of this.playerSpriteVec)    
         {
@@ -101,83 +109,20 @@ cc.Class({
         }
     },
     
-    //开始游戏
-    startGame: function() {
-        //玩家初始化
-        this.localPlayer.init(this);
-        this.opponentPlayer.init(this);
-        
-        //根据牌池生成卡组
-        this.localPlayer.createDeck(tempDeck);
-        this.opponentPlayer.createDeck(tempDeck);
-        
-        //初始化对手player,
-        this.localPlayer._opponentPlayer = this.opponentPlayer;
-        this.opponentPlayer._opponentPlayer = this.localPlayer;
-        
-        var isFirstPlayer = true;   //先手后手
-        
-        if(isFirstPlayer)
-        {
-            this.turnPlayer = this.localPlayer;
-            this.turnOpponent = this.opponentPlayer;
-        }
-        else
-        {
-            this.turnPlayer = this.opponentPlayer;
-            this.turnOpponent = this.localPlayer;            
-        }
-        
-        this.turn = 1;
-        
-        this.turnPlayer.drawDeck(3);
-        this.turnOpponent.drawDeck(3);
-        this.changePhase(PHASE_BEGIN_TURN);
-        
-       //showTipLabel('开始游戏');
+    //召唤随从
+    summonMonster: function(cardIdx) {
+        GameConn.sendPacket(CW_MONSTER_SUMMON_REQUEST, cardIdx); 
     },
-    
-    //交换行动
-    turnPlayerChange: function() {
-        //cc.log('turnPlayerChange, turnPlayer:%s, turnOpponent:%s', this.turnPlayer.heroName, this.turnOpponent.heroName);
-        var tempPlayer = this.turnPlayer;
-        //cc.log('tempPlayerName:%s', tempPlayer.heroName);
-        this.turnPlayer = this.turnOpponent;
-        //cc.log('turnPlayer:%s', this.turnPlayer.heroName);
-
-        this.turnOpponent = tempPlayer;
-        //cc.log('turnopponent:%s', this.turnOpponent.heroName);
-
-    },
-    
+ 
     //随从攻击玩家
-    monsterAtkPlayer: function(monster, player) {
-        if(!monster || monster.atk <= 0 || monster.isAtked === true)
-            return;
-                
-        monster.isAtked = true;
-        player.reduceHp(monster.atk);
-        player.refreshMonsterField();
-        
-        showTipLabel(monster._player.heroName + '的' + monster.cardName + ' 攻击了玩家 ' + player.heroName);
-
-        this.checkWin();
+    monsterAtkPlayer: function(monsterIdx, playerIdx) {
+        GameConn.sendPacket(CW_MONSTER_ATTACKPLAYER_REQUEST, {idx: monsterIdx, targetPlayerIdx: playerIdx});
     },
     
     //随从攻击随从
-    monsterAtkMonster: function(src, dest) {
-        if(!src || !dest || src.atk <= 0 || src.isAtked === true)
-            return;
-    
-        src.isAtked = true;
-        var damage = src.atk;
-        dest.reduceHp(damage);
-        
-        damage = dest.atk;
-        src.reduceHp(damage);
-        
-        showTipLabel(src._player.heroName + '的' + src.cardName + ' 攻击了 ' + dest._player.heroName + '的' + dest.cardName, cc.Color.RED);
-    },
+    monsterAtkMonster: function(monsterIdx, playerIdx, targetMonsterIdx) {
+        GameConn.sendPacket(CW_MONSTER_ATTACKMONSTER_REQUEST, {idx: monsterIdx, targetPlayerIdx: playerIdx, targetMonsterIdx:targetMonsterIdx});
+     },
     
     //判断输赢
     checkWin: function() {

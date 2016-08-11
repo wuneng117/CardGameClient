@@ -65,7 +65,7 @@ cc.Class({
 
             var player = this._player;
             var duel = player.duel;
-            var opponentPlayer = player._opponentPlayer;
+            var opponentPlayer = this.getPlayerSprite(1);
             //var opponentPlayer = player;
             var boundBox, pos, oppoAddX, oppoAddY;
 
@@ -75,7 +75,7 @@ cc.Class({
             oppoAddY = player.monsterFieldLayout.y + player.node.y - opponentPlayer.node.y;
             pos = new cc.v2(this.node.x + oppoAddX, this.node.y + oppoAddY);
             if (boundBox.contains(pos)) {
-                duel.monsterAtkPlayer(player.fieldArray[this._idx], opponentPlayer); //攻击玩家
+                duel.monsterAtkPlayer(this._idx, opponentPlayer.getIdx()); //攻击玩家
                 this.resetPosToSrc();
                 return;
             }
@@ -89,7 +89,7 @@ cc.Class({
                 boundBox = monsterSpriteArray[i].getBoundingBox();
                 pos = new cc.v2(this.node.x + oppoAddX, this.node.y + oppoAddY);
                 if (boundBox.contains(pos)) {
-                    duel.monsterAtkMonster(player.fieldArray[this._idx], opponentPlayer.fieldArray[i]); //攻击对方随从
+                    duel.monsterAtkMonster(this._idx, opponentPlayer.getIdx(), i); //攻击对方随从
                     this.resetPosToSrc();
                     return;
                 }
@@ -102,7 +102,7 @@ cc.Class({
 
     //是否激活
     isTurnActive: function isTurnActive() {
-        return this._player._isTurnActive;
+        return this._player.isTurnActive;
     },
 
     //本回合是否攻击过
