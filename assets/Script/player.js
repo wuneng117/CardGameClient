@@ -75,7 +75,7 @@ cc.Class({
         data.idx = this.idx;
        
         if(flag & PLAYER_UPDATE_ISTURNACTIVE)
-            data.isTurnActive = this._isTurnActive;
+            data.isTurnActive = this.isTurnActive;
         if(flag & PLAYER_UPDATE_HP)
             data.hp = this.hp;
         if(flag & PLAYER_UPDATE_CRITICAL)
@@ -93,7 +93,7 @@ cc.Class({
         var flag = data.flag;
         
         if(flag & PLAYER_UPDATE_ISTURNACTIVE)
-            this._isTurnActive = data.isTurnActive;
+            this.isTurnActive = data.isTurnActive;
         if(flag & PLAYER_UPDATE_HP)
             this.hp = data.hp;
         if(flag & PLAYER_UPDATE_CRITICAL)
@@ -104,6 +104,8 @@ cc.Class({
             this.deckNum= data.deckNum;
     },
     
+    getDuel: function() { return this.duel; },
+    getIdx: function() { return this.idx; },
     getIsTurnActive: function() { return this.isTurnActive; },
     getHeroName: function() { return this.heroName; },
     getHp: function() { return this.hp; },
@@ -118,7 +120,7 @@ cc.Class({
         this.handArray.push(card);
         
         var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
-        playerSprite.createCardsprite(card);
+        playerSprite.createCardSprite(card);
     },
     
     //删除手牌
@@ -151,18 +153,19 @@ cc.Class({
     },
     
     //召唤随从请求
-    summerMonster: function(cardIdx) {
-        this.duel.summerMonster(cardIdx);
+    summonMonster: function(cardIdx) {
+        this.duel.summonMonster(cardIdx);
     },
     
     //创建随从
     createMonster: function(data) {
+        cc.log("创建了一个随从");
         var monster = new Monster();
         monster.unPackDataAll(data);
         this.fieldArray.push(monster);
         
         var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
-        playerSprite.createMonstersprite(monster);
+        playerSprite.createMonsterSprite(monster);
     },
     
     //删除随从
@@ -174,7 +177,7 @@ cc.Class({
     },
     
     //刷新随从
-    handCardUpdate: function(data) {
+    monsterUpdate: function(data) {
         var monster = this.fieldArray[data.idx];
         monster.unPackData(data);
         

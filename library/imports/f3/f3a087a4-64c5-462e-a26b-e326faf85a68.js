@@ -42,6 +42,11 @@ cc.Class({
             }
         },
 
+        //为EventPRocess设置duel
+        setDuel: function setDuel(duel) {
+            EventProcess.setDuel(duel);
+        },
+
         //连接服务器
         connectToServer: function connectToServer() {
             if (this.socket || this.state !== CLIENT_STATE_DISCONNECT) {

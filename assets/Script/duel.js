@@ -61,7 +61,7 @@ cc.Class({
     
     addPlayer: function(param) {
         var idx = param;
-        var player = this.duel.playerVec[idx];
+        var player = this.playerVec[idx];
         //玩家数据已存在
         if(player)
         {
@@ -70,14 +70,14 @@ cc.Class({
         }
         
         //创建玩家并加入玩家数组
-        createPlayer(param);
+        this.createPlayer(param);
     },
     
     createPlayer: function(param) {
         var player = new Player();
         player.init(this);
-        player.unpackDataAll(param);
-        this.playerVec[idx] = player;
+        player.unPackDataAll(param);
+        this.playerVec[param.idx] = player;
     },
     
     getPlayer: function(idx) {
@@ -124,22 +124,6 @@ cc.Class({
         GameConn.sendPacket(CW_MONSTER_ATTACKMONSTER_REQUEST, {idx: monsterIdx, targetPlayerIdx: playerIdx, targetMonsterIdx:targetMonsterIdx});
      },
     
-    //判断输赢
-    checkWin: function() {
-        if(this.turnPlayer.hp <= 0 && this.turnOpponent.hp <= 0)
-        {
-            showTipLabel("平局");
-        }
-        else if(this.turnPlayer.hp <= 0)
-        {
-            showTipLabel("%s 胜利", this.opponentPlayer.heroName);
-        }
-        else if(this.turnOpponent.hp <= 0)
-        {
-            showTipLabel("% 胜利", this.turnPlayer.heroName);
-        }
-    },
-    
     //回合结束（按钮调用）
     turnEnd_BtnEvent: function(event) {
         //不是MainPhase这个按钮不能按
@@ -149,68 +133,8 @@ cc.Class({
         this.changePhase(PHASE_END_TURN);
     },
     
-    addChatItem: function(message, color) {
-        this.chatWnd.addChatItem(message, color);
-        //this.chatWnd.addChatItem('[系统]:用户' + GameConn.getAccountName() + '进入了房间.', cc.Color.RED);
-    },
-    
-    enterBeginTurn: function() {
-        cc.log('is enter BeginTurn?');
-        ++this.turn;
-        this.turnPlayerChange();
-        
-        showTipLabel(this.turnPlayer.heroName + '的回合');
-        this.turnPlayer.setTurnActive(true);    //可以行动
-        this.turnPlayer.criticalPlus(1);        //增加水晶
-        this.turnPlayer.criticalRecover();      //回复水晶
-        this.turnPlayer.awakenMonster();        //重置随从攻击次数
-        this.turnPlayer.drawDeck(1);            //抽1张卡
-        
-    },
-    
-    beginTurn: function(){
-        //进入主流程
-        
-        this.changePhase(PHASE_MAIN_TURN);
-    },
-    
-    leaveBeginTurn: function() {
-
-    },
-    
-    enterMainTurn: function() {
-        
-    },
-    
-    mainTurn: function(){
-        
-    },
-    
-    leaveMainTurn: function() {
-        
-    },
-    
-    enterEndTurn: function() {
-        
-    },
-    
-    endTurn: function(){
-        this.changePhase(PHASE_BEGIN_TURN);
-    },
-    
-    leaveEndTurn: function() {
-        
-        this.turnPlayer.setTurnActive(false);
-    },
-        
-    changePhase: function(nextTurnType) {
-        if(this.phaseState !== 0)
-        {
-            this.leaveTurnFunc[this.phaseState]();
-        }
-        
-        this.enterTurnFunc[nextTurnType]();
-        this.phaseState = nextTurnType;
+    addChatItem: function(message, isSystem) {
+        this.chatWnd.addChatItem(message, isSystem);
     },
     
     // use this for initialization
@@ -225,7 +149,7 @@ cc.Class({
 
     start: function() {
         //this.startGame();
-        EventProcess.setDuel(this);
+        GameConn.setDuel(this);
         GameConn.sendPacket(CW_ENTERROOM_REQUEST, {});  //用户进入房间请求
     },
     

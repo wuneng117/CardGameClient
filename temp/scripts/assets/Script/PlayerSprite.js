@@ -147,7 +147,7 @@ cc.Class({
         var _iteratorError3 = undefined;
 
         try {
-            for (var _iterator3 = criticalSpriteArray[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            for (var _iterator3 = this.criticalSpriteArray[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
                 var criticalSprite = _step3.value;
 
                 criticalSprite.setVisible(0);
@@ -270,6 +270,9 @@ cc.Class({
 
         for (var i = 0; i < arrayLength; ++i) {
             if (monsterSpriteArray[i]) {
+                cc.log("fieldArray length:" + arrayLength);
+                cc.log("this.idx:" + this.idx + " player idx:" + player.idx);
+                cc.log("is turn:" + player.isTurnActive);
                 monsterSpriteArray[i].getComponent('MonsterSprite').init(fieldArray[i], player, i);
                 monsterSpriteArray[i].setPosition(110 * i + monsterSpriteArray[i].width / 2 - this.monsterFieldLayout.width / 2, 0);
                 //cc.log(monsterSpriteArray[i].width);

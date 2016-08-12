@@ -3,7 +3,7 @@ cc._RFpush(module, '09b02/inuNNQrhcmkHMp3n7', 'CardSprite');
 // Script\CardSprite.js
 
 cc.Class({
-    'extends': cc.Component,
+    "extends": cc.Component,
 
     properties: {
         // foo: {
@@ -20,33 +20,36 @@ cc.Class({
         _idx: 0, //数组索引
 
         srcPos: {
-            'default': {}
+            "default": {}
         },
 
         //-----------------------控件-------------------------------------
         hpLabel: {
-            'default': null,
+            "default": null,
             type: cc.Label
         },
 
         criticalLabel: {
-            'default': null,
+            "default": null,
             type: cc.Label
         },
 
         atkLabel: {
-            'default': null,
+            "default": null,
             type: cc.Label
         },
 
         nameLabel: {
-            'default': null,
+            "default": null,
             type: cc.Label
         }
     },
 
     setInputControl: function setInputControl() {
         this.node.on('touchstart', function (event) {
+            cc.log("player:" + this._player.getHeroName());
+            cc.log("player:" + this._player.getIsTurnActive());
+
             if (!this.isTurnActive()) return;
 
             this.srcPos.x = this.node.x;
@@ -69,10 +72,12 @@ cc.Class({
         this.node.on('touchend', function (event) {
             if (!this.isTurnActive()) return;
 
-            var boundBox = this._player.monsterFieldLayout.getBoundingBox();
+            var duel = this._player.getDuel();
+            var playerSprite = duel.getPlayerSprite(0);
+            var boundBox = playerSprite.monsterFieldLayout.getBoundingBox();
             var pos = new cc.v2(this.node.x + this.node.parent.x, this.node.y + this.node.parent.y);
             if (boundBox.contains(pos)) {
-                this._player.summerMonster(this._idx);
+                this._player.summonMonster(this._idx);
             }
 
             this.node.setPosition(this.srcPos.x, this.srcPos.y);
@@ -87,7 +92,7 @@ cc.Class({
     // use this for initialization
     onLoad: function onLoad() {
         this.srcPos = { 'x': 0, 'y': 0 };
-
+        cc.log("cardsprite.init");
         this.setInputControl();
     },
 

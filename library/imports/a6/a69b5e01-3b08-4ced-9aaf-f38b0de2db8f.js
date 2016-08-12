@@ -43,9 +43,9 @@ cc.Class({
             this.gameConn.registerHandler(WC_HANDCARD_CREATE, this[WC_HANDCARD_CREATE].bind(this));
             this.gameConn.registerHandler(WC_HANDCARD_UPDATE, this[WC_HANDCARD_UPDATE].bind(this));
             this.gameConn.registerHandler(WC_HANDCARD_DELETE, this[WC_HANDCARD_DELETE].bind(this));
-            this.gameConn.registerHandler(WC_HANDCARD_CREATE, this[WC_MONSTER_CREATE].bind(this));
-            this.gameConn.registerHandler(WC_HANDCARD_UPDATE, this[WC_MONSTER_UPDATE].bind(this));
-            this.gameConn.registerHandler(WC_HANDCARD_DELETE, this[WC_MONSTER_DELETE].bind(this));
+            this.gameConn.registerHandler(WC_MONSTER_CREATE, this[WC_MONSTER_CREATE].bind(this));
+            this.gameConn.registerHandler(WC_MONSTER_UPDATE, this[WC_MONSTER_UPDATE].bind(this));
+            this.gameConn.registerHandler(WC_MONSTER_DELETE, this[WC_MONSTER_DELETE].bind(this));
         },
 
         //服务器断开连接
@@ -88,18 +88,17 @@ cc.Class({
 
         //服务端发送聊天信息
         WC_CHAT_ADD: function WC_CHAT_ADD(param) {
-            if (param.isSystem) this.duel.addChatItem(param.message, cc.Color.RED);else this.duel.addChatItem(param.message);
+            this.duel.addChatItem(param.message, param.isSystem);
         },
 
         //添加完整玩家数据
         WC_PLAYER_ADD: function WC_PLAYER_ADD(param) {
-            duel.addPlayer(param);
+            this.duel.addPlayer(param);
         },
 
         //Player更新
         WC_PLAYER_UPDATE: function WC_PLAYER_UPDATE(param) {
             var idx = param.idx;
-
             var player = this.duel.getPlayer(idx);
             if (!player) return;
 
@@ -115,7 +114,8 @@ cc.Class({
                 showTipLabel('游戏已经开始了，不能准备', cc.Color.RED);
             } else {
                 //第0个玩家控件为玩家自己，设置为玩家IDX
-                var playerSprite = this.duel.getPlayerSprte(0);
+                var playerSprite = this.duel.getPlayerSprite(0);
+                cc.log(typeof playerSprite);
                 playerSprite.setIdx(param.idx);
             }
         },
@@ -123,7 +123,9 @@ cc.Class({
         //有玩家准备游戏
         WC_DUELREADY: function WC_DUELREADY(param) {
             var idx = param.idx;
-
+            // cc.log("玩家%d准备了游戏！", idx);
+            // cc.log("playerVec[0]idx:"+this.duel.getPlayer(0).idx);
+            // cc.log("playerSpriteVec[0],[1] idx:"+this.duel.getPlayerSprite(0).idx+this.duel.getPlayerSprite(1).idx);
             //玩家更新
             var player = this.duel.getPlayer(idx);
             if (!player) return;
@@ -135,7 +137,7 @@ cc.Class({
             //1.玩家自己准备，0控件刷新为玩家；
             //2.第一个准备的玩家，1控件刷新为此玩家；
             //3.第二个准备的玩家，0控件刷新为此玩家；
-            var playerSprite = this.duel.getPlayerSprte(0);
+            var playerSprite = this.duel.getPlayerSprite(0);
             var playerSprite1 = this.duel.getPlayerSprite(1);
             if (playerSprite.getIdx() !== idx) {
                 if (playerSprite1.getIdx() !== -1) {
@@ -145,7 +147,10 @@ cc.Class({
                 }
             }
 
-            duel.refreshPlayerSprite(idx);
+            // cc.log("玩家结束准备了游戏！");
+            // cc.log("playerVec[0]idx:"+this.duel.getPlayer(0).idx);
+            // cc.log("playerSpriteVec[0],[1] idx:"+this.duel.getPlayerSprite(0).idx+this.duel.getPlayerSprite(1).idx);
+            this.duel.refreshPlayerSprite(idx);
         },
 
         WC_HANDCARD_CREATE: function WC_HANDCARD_CREATE(param) {
@@ -172,7 +177,6 @@ cc.Class({
         WC_MONSTER_CREATE: function WC_MONSTER_CREATE(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
-
             player.createMonster(param.param);
         },
 

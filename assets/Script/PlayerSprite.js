@@ -96,7 +96,7 @@ cc.Class({
         //名字
         this.heroNameLabel.string = '';
         //水晶
-        for(var criticalSprite of criticalSpriteArray)
+        for(var criticalSprite of this.criticalSpriteArray)
         {
             criticalSprite.setVisible(0);
         }
@@ -218,6 +218,9 @@ cc.Class({
         {
             if(monsterSpriteArray[i])
             {
+                cc.log("fieldArray length:"+arrayLength);
+                cc.log("this.idx:"+this.idx+" player idx:"+player.idx);
+                cc.log("is turn:"+player.isTurnActive);
                 monsterSpriteArray[i].getComponent('MonsterSprite').init(fieldArray[i], player, i);
                 monsterSpriteArray[i].setPosition(110*i+monsterSpriteArray[i].width/2-this.monsterFieldLayout.width/2, 0);
                 //cc.log(monsterSpriteArray[i].width);

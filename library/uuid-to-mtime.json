@@ -15,8 +15,8 @@
     "relativePath": "Script\\HelloWorld.js"
   },
   "2d2f792f-a40c-49bb-a189-ed176a246e49": {
-    "asset": 1470823582037,
-    "meta": 1470823582063,
+    "asset": 1470992917521,
+    "meta": 1470992917549,
     "relativePath": "Scene\\helloworld.fire"
   },
   "7b81d4e8-ec84-4716-968d-500ac1d78a54": {
@@ -39,11 +39,6 @@
     "meta": 1470712794739,
     "relativePath": "Script\\data"
   },
-  "09b02fe2-9ee3-4d42-b85c-9a41cca779fb": {
-    "asset": 1470883670268,
-    "meta": 1470883670314,
-    "relativePath": "Script\\CardSprite.js"
-  },
   "77427dda-4cfb-4894-b714-8e7a4b665559": {
     "asset": 1470896299934,
     "meta": 1470896299970,
@@ -64,25 +59,15 @@
     "meta": 1470712794776,
     "relativePath": "Script\\data\\CardData.js"
   },
-  "c8c0ae01-bad2-4c02-abb0-f5de6c32a7e2": {
-    "asset": 1470910011386,
-    "meta": 1470910011482,
-    "relativePath": "Script\\player.js"
-  },
   "74868942-84b2-4792-ac4e-9868e1521924": {
-    "asset": 1470906798119,
-    "meta": 1470906798215,
+    "asset": 1470992187190,
+    "meta": 1470992187323,
     "relativePath": "Script\\duel.js"
   },
   "27663561-02bd-4640-bf15-3c10ad25dae4": {
     "asset": 1470904618457,
     "meta": 1470904618487,
     "relativePath": "Script\\type.js"
-  },
-  "d7da46aa-067a-4aae-b4ca-da1e8f6d1e76": {
-    "asset": 1470904505286,
-    "meta": 1470904505348,
-    "relativePath": "Script\\MonsterSprite.js"
   },
   "97b2c287-166e-40c3-bcb4-bd4f2476b60e": {
     "asset": 1470898391728,
@@ -270,14 +255,9 @@
     "relativePath": "Script\\NetWork"
   },
   "f3a087a4-64c5-462e-a26b-e326faf85a68": {
-    "asset": 1470385263193,
-    "meta": 1470712798857,
+    "asset": 1470971056306,
+    "meta": 1470971056357,
     "relativePath": "Script\\NetWork\\GameConn.js"
-  },
-  "a69b5e01-3b08-4ced-9aaf-f38b0de2db8f": {
-    "asset": 1470909867273,
-    "meta": 1470909867354,
-    "relativePath": "Script\\NetWork\\EventProcess.js"
   },
   "fb431d04-0e1f-496e-909f-fd0c6229f6c0": {
     "asset": 1470307930588,
@@ -290,13 +270,33 @@
     "relativePath": "ChatWndItem.prefab"
   },
   "546eafbe-9c90-4e42-8337-b99f9eb79aff": {
-    "asset": 1470368154394,
-    "meta": 1470712794731,
+    "asset": 1470972612627,
+    "meta": 1470972612652,
     "relativePath": "Script\\ChatWnd.js"
   },
   "e48e0070-f6c9-47c5-b207-27bdf42db444": {
-    "asset": 1470910114857,
-    "meta": 1470910114968,
+    "asset": 1470987225189,
+    "meta": 1470987225541,
     "relativePath": "Script\\PlayerSprite.js"
+  },
+  "a69b5e01-3b08-4ced-9aaf-f38b0de2db8f": {
+    "asset": 1470991432225,
+    "meta": 1470991432452,
+    "relativePath": "Script\\NetWork\\EventProcess.js"
+  },
+  "09b02fe2-9ee3-4d42-b85c-9a41cca779fb": {
+    "asset": 1470992057893,
+    "meta": 1470992057977,
+    "relativePath": "Script\\CardSprite.js"
+  },
+  "d7da46aa-067a-4aae-b4ca-da1e8f6d1e76": {
+    "asset": 1470991962133,
+    "meta": 1470991969498,
+    "relativePath": "Script\\MonsterSprite.js"
+  },
+  "c8c0ae01-bad2-4c02-abb0-f5de6c32a7e2": {
+    "asset": 1470992142068,
+    "meta": 1470992142249,
+    "relativePath": "Script\\player.js"
   }
 }

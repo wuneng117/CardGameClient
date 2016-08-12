@@ -43,7 +43,12 @@ cc.Class({
                 window.io = require('socket.io');
             }
         },
-                        
+        
+        //为EventPRocess设置duel
+        setDuel: function(duel) {
+            EventProcess.setDuel(duel);    
+        },
+        
         //连接服务器
         connectToServer: function() {
             if(this.socket || this.state !== CLIENT_STATE_DISCONNECT)

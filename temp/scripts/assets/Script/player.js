@@ -78,7 +78,7 @@ cc.Class({
         data.flag = flag;
         data.idx = this.idx;
 
-        if (flag & PLAYER_UPDATE_ISTURNACTIVE) data.isTurnActive = this._isTurnActive;
+        if (flag & PLAYER_UPDATE_ISTURNACTIVE) data.isTurnActive = this.isTurnActive;
         if (flag & PLAYER_UPDATE_HP) data.hp = this.hp;
         if (flag & PLAYER_UPDATE_CRITICAL) data.critical = this.critical;
         if (flag & PLAYER_UPDATE_MAXCRITICAL) data.maxCritical = this.maxCritical;
@@ -90,13 +90,19 @@ cc.Class({
     unPackData: function unPackData(data) {
         var flag = data.flag;
 
-        if (flag & PLAYER_UPDATE_ISTURNACTIVE) this._isTurnActive = data.isTurnActive;
+        if (flag & PLAYER_UPDATE_ISTURNACTIVE) this.isTurnActive = data.isTurnActive;
         if (flag & PLAYER_UPDATE_HP) this.hp = data.hp;
         if (flag & PLAYER_UPDATE_CRITICAL) this.critical = data.critical;
         if (flag & PLAYER_UPDATE_ISREADY) this.isReady = data.isReady;
         if (flag & PLAYER_UPDATE_DECKNUM) this.deckNum = data.deckNum;
     },
 
+    getDuel: function getDuel() {
+        return this.duel;
+    },
+    getIdx: function getIdx() {
+        return this.idx;
+    },
     getIsTurnActive: function getIsTurnActive() {
         return this.isTurnActive;
     },
@@ -123,7 +129,7 @@ cc.Class({
         this.handArray.push(card);
 
         var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
-        playerSprite.createCardsprite(card);
+        playerSprite.createCardSprite(card);
     },
 
     //删除手牌
@@ -155,18 +161,19 @@ cc.Class({
     },
 
     //召唤随从请求
-    summerMonster: function summerMonster(cardIdx) {
-        this.duel.summerMonster(cardIdx);
+    summonMonster: function summonMonster(cardIdx) {
+        this.duel.summonMonster(cardIdx);
     },
 
     //创建随从
     createMonster: function createMonster(data) {
+        cc.log("创建了一个随从");
         var monster = new Monster();
         monster.unPackDataAll(data);
         this.fieldArray.push(monster);
 
         var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
-        playerSprite.createMonstersprite(monster);
+        playerSprite.createMonsterSprite(monster);
     },
 
     //删除随从
@@ -178,7 +185,7 @@ cc.Class({
     },
 
     //刷新随从
-    handCardUpdate: function handCardUpdate(data) {
+    monsterUpdate: function monsterUpdate(data) {
         var monster = this.fieldArray[data.idx];
         monster.unPackData(data);
 

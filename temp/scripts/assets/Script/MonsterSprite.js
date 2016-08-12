@@ -64,32 +64,33 @@ cc.Class({
             if (!this.isTurnActive() || this.isAtked()) return;
 
             var player = this._player;
-            var duel = player.duel;
-            var opponentPlayer = this.getPlayerSprite(1);
+            var duel = player.getDuel();
+            var playerSprite = duel.getPlayerSprite(0);
+            var opponentPlayerSprite = duel.getPlayerSprite(1);
             //var opponentPlayer = player;
             var boundBox, pos, oppoAddX, oppoAddY;
 
             //判断是否移动到对方英雄上
-            boundBox = opponentPlayer.heroIconSprite.node.getBoundingBox();
-            oppoAddY = player.monsterFieldLayout.x + player.node.x - opponentPlayer.node.x;
-            oppoAddY = player.monsterFieldLayout.y + player.node.y - opponentPlayer.node.y;
+            boundBox = opponentPlayerSprite.heroIconSprite.node.getBoundingBox();
+            oppoAddY = playerSprite.monsterFieldLayout.x + playerSprite.node.x - opponentPlayerSprite.node.x;
+            oppoAddY = playerSprite.monsterFieldLayout.y + playerSprite.node.y - opponentPlayerSprite.node.y;
             pos = new cc.v2(this.node.x + oppoAddX, this.node.y + oppoAddY);
             if (boundBox.contains(pos)) {
-                duel.monsterAtkPlayer(this._idx, opponentPlayer.getIdx()); //攻击玩家
+                duel.monsterAtkPlayer(this._idx, opponentPlayerSprite.getIdx()); //攻击玩家
                 this.resetPosToSrc();
                 return;
             }
 
             //判断是否移动到对方随从上
-            var monsterSpriteArray = opponentPlayer.monsterSpriteArray;
-            oppoAddX = player.monsterFieldLayout.x + player.node.x - opponentPlayer.node.x - opponentPlayer.monsterFieldLayout.x;
-            oppoAddY = player.monsterFieldLayout.y + player.node.y - opponentPlayer.node.y - opponentPlayer.monsterFieldLayout.y;
-            //cc.log('opponentPlayer.monsterSpriteArray.length:%d', monsterSpriteArray.length);
+            var monsterSpriteArray = opponentPlayerSprite.monsterSpriteArray;
+            oppoAddX = playerSprite.monsterFieldLayout.x + playerSprite.node.x - opponentPlayerSprite.node.x - opponentPlayerSprite.monsterFieldLayout.x;
+            oppoAddY = playerSprite.monsterFieldLayout.y + playerSprite.node.y - opponentPlayerSprite.node.y - opponentPlayerSprite.monsterFieldLayout.y;
+            //cc.log('opponentPlayerSprite.monsterSpriteArray.length:%d', monsterSpriteArray.length);
             for (var i = 0; i < monsterSpriteArray.length; ++i) {
                 boundBox = monsterSpriteArray[i].getBoundingBox();
                 pos = new cc.v2(this.node.x + oppoAddX, this.node.y + oppoAddY);
                 if (boundBox.contains(pos)) {
-                    duel.monsterAtkMonster(this._idx, opponentPlayer.getIdx(), i); //攻击对方随从
+                    duel.monsterAtkMonster(this._idx, opponentPlayerSprite.getIdx(), i); //攻击对方随从
                     this.resetPosToSrc();
                     return;
                 }

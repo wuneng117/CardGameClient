@@ -47,7 +47,7 @@ cc.Class({
 
     // },
 
-    addChatItem: function addChatItem(str, color) {
+    addChatItem: function addChatItem(str, isSystem) {
         var content = this.content;
 
         var chatItem = cc.instantiate(this.itemPrefab);
@@ -60,8 +60,10 @@ cc.Class({
         chatItem.setPosition(-content.width / 2 + 5, -content.height);
         content.addChild(chatItem);
         //cc.log('content height: %d', content.height);
-        strLabel.getComponent('cc.Label').string = str; //写字
-        if (color) strLabel.color = color;
+        if (isSystem) {
+            strLabel.getComponent('cc.Label').string = '[系统]:' + str; //写字
+            strLabel.color = cc.Color.RED;
+        } else strLabel.getComponent('cc.Label').string = str; //写字
 
         //调整大小，刷新到最下面一页
         content.setContentSize(content.width, content.height + strLabel.height);
