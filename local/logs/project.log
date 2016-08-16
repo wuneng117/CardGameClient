@@ -1,101 +1,59 @@
-2016-08-12T07:09:31.489Z - normal: Load ~/.CocosCreator/settings.json
-2016-08-12T07:09:31.496Z - normal: checking language setting...
-2016-08-12T07:09:31.497Z - normal: Language: zh
-2016-08-12T07:09:32.606Z - success: protocol editor-framework registerred
-2016-08-12T07:09:32.606Z - success: protocol app registerred
-2016-08-12T07:09:32.606Z - success: protocol packages registerred
-2016-08-12T07:09:32.607Z - success: protocol unpack registerred
-2016-08-12T07:09:32.779Z - normal: connected!
-2016-08-12T07:09:32.781Z - normal: Check project C:\Users\bingogame\Documents\HELLO
-2016-08-12T07:09:32.785Z - normal: Initializing Cocos Creator Editor
-2016-08-12T07:09:33.529Z - normal: Initializing Cocos2d
-2016-08-12T07:09:34.312Z - normal: Initializing Asset Database
-2016-08-12T07:09:34.356Z - success: protocol uuid registerred
-2016-08-12T07:09:34.356Z - success: protocol uuid registerred
-2016-08-12T07:09:34.356Z - success: protocol thumbnail registerred
-2016-08-12T07:09:34.356Z - normal: Loading editor/builtin packages
-2016-08-12T07:09:34.552Z - success: assets loaded
-2016-08-12T07:09:34.554Z - success: builder loaded
-2016-08-12T07:09:34.558Z - success: hierarchy loaded
-2016-08-12T07:09:34.562Z - success: inspector loaded
-2016-08-12T07:09:34.563Z - success: keystore loaded
-2016-08-12T07:09:34.567Z - success: node-library loaded
-2016-08-12T07:09:34.570Z - success: preferences loaded
-2016-08-12T07:09:34.586Z - success: project-importer loaded
-2016-08-12T07:09:34.588Z - success: project-settings loaded
-2016-08-12T07:09:34.591Z - success: ui-kit loaded
-2016-08-12T07:09:34.601Z - success: ui-grid loaded
-2016-08-12T07:09:34.621Z - success: scene loaded
-2016-08-12T07:09:34.623Z - success: sprite-editor loaded
-2016-08-12T07:09:34.629Z - success: timeline loaded
-2016-08-12T07:09:34.630Z - success: ui-kit-extra loaded
-2016-08-12T07:09:34.631Z - normal: Loading builtin packages
-2016-08-12T07:09:34.637Z - success: asset-db-debugger loaded
-2016-08-12T07:09:34.638Z - success: code-editor loaded
-2016-08-12T07:09:34.639Z - success: color-picker loaded
-2016-08-12T07:09:34.643Z - success: console loaded
-2016-08-12T07:09:34.645Z - success: package-manager loaded
-2016-08-12T07:09:34.649Z - success: tester loaded
-2016-08-12T07:09:34.650Z - success: ui-tree loaded
-2016-08-12T07:09:34.734Z - normal: Initializing project C:\Users\bingogame\Documents\HELLO
-2016-08-12T07:09:34.736Z - normal: Loading packages
-2016-08-12T07:09:34.740Z - normal: Run Application
-2016-08-12T07:09:35.851Z - success: preview server running at http://localhost:7456
-2016-08-12T07:09:40.304Z - normal: 1.1.2
-2016-08-12T07:29:57.223Z - normal: Compiled successfully
-2016-08-12T07:32:08.793Z - error: Failed to update asset db://assets/Script/PlayerSprite.js, messages: SyntaxError: unknown: Unexpected token (223:53)
-                cc.log("fieldArray length:"+arrayLength);
-                cc.log("this.idx:"+this.idx+" player idx:"+player.getIdx());
-                cc.log("is turn:"+player.isTurnActive;
-                monsterSpriteArray[i].getComponent('MonsterSprite').init(fieldArray[i], player, i);
-                monsterSpriteArray[i].setPosition(110*i+monsterSpriteArray[i].width/2-this.monsterFieldLayout.width/2, 0);
-                //cc.log(monsterSpriteArray[i].width);
-    at Parser.pp.raise (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\location.js:24:13)
-    at Parser.pp.unexpected (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\util.js:82:8)
-    at Parser.pp.expect (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\util.js:76:33)
-    at Parser.pp.parseExprList (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:785:12)
-    at Parser.pp.parseSubscripts (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:270:29)
-    at Parser.pp.parseExprSubscripts (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:240:17)
-    at Parser.pp.parseMaybeUnary (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:217:19)
-    at Parser.pp.parseExprOps (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:163:19)
-    at Parser.pp.parseMaybeConditional (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:145:19)
-    at Parser.pp.parseMaybeAssign (C:\CocosCreator\resources\app.asar\node_modules\babylon\lib\parser\expression.js:112:19)
-    at s.AssetDB.error (C:\CocosCreator\resources\app.asar\asset-db\lib\utils.js:1:2582)
-    at Object.callback (C:\CocosCreator\resources\app.asar\asset-db\core\ipc.js:1:4288)
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:906:35
-    at _arrayEach (C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:85:13)
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:898:17
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:44:16
-    at s.<anonymous> (C:\CocosCreator\resources\app.asar\asset-db\index.js:1:1406)
-    at C:\CocosCreator\resources\app.asar\asset-db\lib\tasks.js:1:18991
-    at C:\CocosCreator\resources\app.asar\node_modules\async\lib\async.js:52:16
-2016-08-12T07:32:23.938Z - normal: Compiled successfully
-2016-08-12T07:33:49.886Z - normal: Compiled successfully
-2016-08-12T07:34:39.388Z - normal: Compiled successfully
-2016-08-12T07:38:19.295Z - normal: Compiled successfully
-2016-08-12T07:40:21.120Z - normal: Compiled successfully
-2016-08-12T07:42:14.324Z - normal: Compiled successfully
-2016-08-12T07:46:17.406Z - normal: Compiled successfully
-2016-08-12T07:47:03.885Z - normal: Compiled successfully
-2016-08-12T07:47:59.061Z - normal: Compiled successfully
-2016-08-12T07:48:38.202Z - normal: Compiled successfully
-2016-08-12T07:54:01.856Z - normal: Compiled successfully
-2016-08-12T07:58:13.954Z - normal: Compiled successfully
-2016-08-12T07:58:47.326Z - normal: Compiled successfully
-2016-08-12T08:06:23.431Z - normal: Compiled successfully
-2016-08-12T08:08:50.781Z - normal: Compiled successfully
-2016-08-12T08:08:57.005Z - normal: Compiled successfully
-2016-08-12T08:10:35.956Z - normal: Compiled successfully
-2016-08-12T08:14:23.821Z - normal: Compiled successfully
-2016-08-12T08:17:30.282Z - normal: Compiled successfully
-2016-08-12T08:17:37.872Z - normal: Compiled successfully
-2016-08-12T08:19:53.269Z - normal: Compiled successfully
-2016-08-12T08:43:57.363Z - normal: Compiled successfully
-2016-08-12T08:52:52.033Z - normal: Compiled successfully
-2016-08-12T08:52:56.803Z - normal: Compiled successfully
-2016-08-12T08:53:01.388Z - normal: Compiled successfully
-2016-08-12T08:54:22.810Z - normal: Compiled successfully
-2016-08-12T08:54:36.514Z - normal: Compiled successfully
-2016-08-12T08:55:46.690Z - normal: Compiled successfully
-2016-08-12T08:56:31.931Z - normal: Compiled successfully
-2016-08-12T09:52:01.005Z - info: shutdown preview server
+2016-08-16T03:55:04.141Z - normal: Load ~/.CocosCreator/settings.json
+2016-08-16T03:55:04.141Z - normal: checking language setting...
+2016-08-16T03:55:04.141Z - normal: Language: zh
+2016-08-16T03:55:05.234Z - success: protocol editor-framework registerred
+2016-08-16T03:55:05.234Z - success: protocol app registerred
+2016-08-16T03:55:05.234Z - success: protocol packages registerred
+2016-08-16T03:55:05.234Z - success: protocol unpack registerred
+2016-08-16T03:55:05.531Z - normal: connected!
+2016-08-16T03:55:05.531Z - normal: Check project C:\Users\bingogame\Documents\HELLO
+2016-08-16T03:55:05.531Z - normal: Initializing Cocos Creator Editor
+2016-08-16T03:55:06.046Z - normal: Initializing Cocos2d
+2016-08-16T03:55:07.091Z - normal: Initializing Asset Database
+2016-08-16T03:55:07.153Z - success: protocol uuid registerred
+2016-08-16T03:55:07.153Z - success: protocol uuid registerred
+2016-08-16T03:55:07.153Z - success: protocol thumbnail registerred
+2016-08-16T03:55:07.153Z - normal: Loading editor/builtin packages
+2016-08-16T03:55:07.325Z - success: assets loaded
+2016-08-16T03:55:07.340Z - success: builder loaded
+2016-08-16T03:55:07.340Z - success: hierarchy loaded
+2016-08-16T03:55:07.340Z - success: inspector loaded
+2016-08-16T03:55:07.340Z - success: keystore loaded
+2016-08-16T03:55:07.340Z - success: node-library loaded
+2016-08-16T03:55:07.356Z - success: preferences loaded
+2016-08-16T03:55:07.372Z - success: project-importer loaded
+2016-08-16T03:55:07.372Z - success: project-settings loaded
+2016-08-16T03:55:07.372Z - success: ui-kit loaded
+2016-08-16T03:55:07.387Z - success: ui-grid loaded
+2016-08-16T03:55:07.387Z - success: scene loaded
+2016-08-16T03:55:07.387Z - success: sprite-editor loaded
+2016-08-16T03:55:07.387Z - success: timeline loaded
+2016-08-16T03:55:07.403Z - success: ui-kit-extra loaded
+2016-08-16T03:55:07.403Z - normal: Loading builtin packages
+2016-08-16T03:55:07.403Z - success: asset-db-debugger loaded
+2016-08-16T03:55:07.434Z - success: code-editor loaded
+2016-08-16T03:55:07.434Z - success: color-picker loaded
+2016-08-16T03:55:07.434Z - success: console loaded
+2016-08-16T03:55:07.434Z - success: package-manager loaded
+2016-08-16T03:55:07.450Z - success: tester loaded
+2016-08-16T03:55:07.450Z - success: ui-tree loaded
+2016-08-16T03:55:07.528Z - normal: Initializing project C:\Users\bingogame\Documents\HELLO
+2016-08-16T03:55:07.559Z - normal: Loading packages
+2016-08-16T03:55:07.559Z - normal: Run Application
+2016-08-16T03:55:08.838Z - success: preview server running at http://localhost:7456
+2016-08-16T03:55:14.487Z - normal: 1.1.2
+2016-08-16T06:31:04.442Z - normal: Compiled successfully
+2016-08-16T06:34:31.121Z - normal: Compiled successfully
+2016-08-16T06:45:37.791Z - normal: Compiled successfully
+2016-08-16T06:45:42.358Z - normal: Compiled successfully
+2016-08-16T06:45:47.394Z - normal: Compiled successfully
+2016-08-16T06:45:52.455Z - normal: Compiled successfully
+2016-08-16T06:51:15.850Z - normal: Compiled successfully
+2016-08-16T06:52:06.641Z - normal: Compiled successfully
+2016-08-16T06:56:44.581Z - normal: Compiled successfully
+2016-08-16T07:00:00.316Z - normal: Compiled successfully
+2016-08-16T07:45:17.747Z - normal: Compiled successfully
+2016-08-16T07:51:00.316Z - normal: Compiled successfully
+2016-08-16T07:52:50.485Z - normal: Compiled successfully
+2016-08-16T08:18:37.824Z - normal: Compiled successfully
+2016-08-16T08:38:05.053Z - normal: Compiled successfully

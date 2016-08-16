@@ -147,15 +147,15 @@ cc.Class({
         
         this.handFiledLayout.node.addChild(cardSprite);
         this.handCardSpriteArray.push(cardSprite);
-        this.refreshHandCard(); //刷新手牌图片
+        this.refreshCardSprite(); //刷新手牌图片
     },
     
     //删除手牌图片
-    handCardDelete: function(idx) {
+    deleteCardSprite: function(idx) {
         var cardSprite = this.handCardSpriteArray[idx];
         this.cardPool.put(cardSprite);
         this.handCardSpriteArray.splice(idx, 1);
-        this.refreshHandCard(); //刷新手牌图片
+        this.refreshCardSprite(); //刷新手牌图片
     },
     
     //创建随从图片
@@ -173,20 +173,20 @@ cc.Class({
     
         this.monsterFieldLayout.addChild(monsterSprite);
         this.monsterSpriteArray.push(monsterSprite);
-        this.refreshMonsterField(); //刷新随从区
+        this.refreshMonsterSprite(); //刷新随从区
     },
     
     //删除随从图片
     deleteMonsterSprite: function(idx) {
         var monsterSprite = this.monsterSpriteArray[idx];
-        this.cardPool.put(monsterSprite);
+        this.monsterPool.put(monsterSprite);
         this.monsterSpriteArray.splice(idx, 1);
-        this.refreshMonsterField(); //刷新随从图片       
+        this.refreshMonsterSprite(); //刷新随从图片       
     },
     
     //-----------------------界面刷新---------------------------------------
     //手牌图片刷新
-    refreshHandCard: function() {
+    refreshCardSprite: function() {
         var player = this.duel.getPlayer(this.idx);
         var handArray = player.handArray;
         var handCardSpriteArray = this.handCardSpriteArray;
@@ -208,7 +208,7 @@ cc.Class({
     },
     
     //随从图片刷新
-    refreshMonsterField: function() {
+    refreshMonsterSprite: function() {
         var player = this.duel.getPlayer(this.idx);
         var fieldArray = player.fieldArray;
         var monsterSpriteArray = this.monsterSpriteArray;

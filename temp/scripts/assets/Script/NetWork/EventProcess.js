@@ -161,34 +161,34 @@ cc.Class({
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
 
-            player.createCardToHand(param.param);
+            player.createCardToHand(param.data);
         },
 
         WC_HANDCARD_UPDATE: function WC_HANDCARD_UPDATE(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
-            var idx = param.idx;
-            player.handCardUpdate(idx);
+            var data = param.data;
+            player.handCardUpdate(data);
         },
 
         WC_HANDCARD_DELETE: function WC_HANDCARD_DELETE(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
             var idx = param.idx;
-            player.handCardDelete(idx);
+            player.deleteCardSprite(idx);
         },
 
         WC_MONSTER_CREATE: function WC_MONSTER_CREATE(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
-            player.createMonster(param.param);
+            player.createMonster(param.data);
         },
 
         WC_MONSTER_UPDATE: function WC_MONSTER_UPDATE(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
-            var idx = param.idx;
-            player.monsterUpdate(idx);
+            var data = param.data;
+            player.monsterUpdate(data);
         },
 
         WC_MONSTER_DELETE: function WC_MONSTER_DELETE(param) {

@@ -84,7 +84,7 @@ cc.Class({
     unPackData: function(data) {
         var flag = data.flag;
         this.idx =  data.idx;
-        this.isHide = hide;
+        this.isHide = data.hide;
         
         if(this.isHide)
             return;

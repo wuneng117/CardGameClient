@@ -48,6 +48,10 @@ window.WC_MONSTER_CREATE = 'WC_MONSTER_CREATE'; //随从创建
 window.WC_MONSTER_UPDATE = 'WC_MONSTER_UPDATE'; //随从更新
 window.WC_MONSTER_DELETE = 'WC_MONSTER_DELETE'; //随从删除
 
+//结束回合
+window.CW_ENDPHASE_REQUEST = 'CW_ENDPHASE_REQUEST'; //客户端向服务端发送回合结束请求
+window.WC_END_PHASE_RESPONSE = 'WC_END_PHASE_RESPONSE'; //服务端向客户端发送回合结束响应
+
 window.showTipLabel = function showTipLabel(str, color) {
     //文字标签创建
     var node = new cc.Node();

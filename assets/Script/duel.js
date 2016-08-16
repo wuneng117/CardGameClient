@@ -30,10 +30,6 @@ cc.Class({
         // ...
         
         playerVec: [],
-        state : DUEL_STATE_REST,
-        
-        turn: 0,            //每个玩家一回合加一次
-        round: 0,           //每个玩家都行动过一回合加一次
 
         //-----------------------控件-------------------------------------------
         cardPrefab: {
@@ -126,11 +122,13 @@ cc.Class({
     
     //回合结束（按钮调用）
     turnEnd_BtnEvent: function(event) {
-        //不是MainPhase这个按钮不能按
-        if(this.phaseState !== PHASE_MAIN_TURN)
+        //不是自己行动不能按
+        var player = this.playerVec[this.playerSpriteVec[0].getIdx()];
+        cc.log(player.getIsTurnActive());
+        if(!player.getIsTurnActive())
             return;
             
-        this.changePhase(PHASE_END_TURN);
+        GameConn.sendPacket(CW_ENDPHASE_REQUEST, {});  //用户结束回合请求
     },
     
     addChatItem: function(message, isSystem) {
@@ -148,13 +146,11 @@ cc.Class({
     },
 
     start: function() {
-        //this.startGame();
         GameConn.setDuel(this);
         GameConn.sendPacket(CW_ENTERROOM_REQUEST, {});  //用户进入房间请求
     },
     
     // called every frame, uncomment this function to activate update callback
     update: function (dt) {
-        //this.turnFunc[this.phaseState]();
     },
 });

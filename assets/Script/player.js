@@ -93,7 +93,10 @@ cc.Class({
         var flag = data.flag;
         
         if(flag & PLAYER_UPDATE_ISTURNACTIVE)
+        {
             this.isTurnActive = data.isTurnActive;
+            cc.log("isTurnActive:"+data.isTurnActive)
+        }
         if(flag & PLAYER_UPDATE_HP)
             this.hp = data.hp;
         if(flag & PLAYER_UPDATE_CRITICAL)
@@ -124,7 +127,7 @@ cc.Class({
     },
     
     //删除手牌
-    handCardDelete: function(idx) {
+    deleteCardSprite: function(idx) {
         this.handArray.splice(idx, 1);
         
         var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
@@ -137,7 +140,7 @@ cc.Class({
         card.unPackData(data);
         
         var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
-        playerSprite.refreshHandCard();
+        playerSprite.refreshCardSprite();
     },
     
     //重置随从攻击次数
@@ -149,7 +152,7 @@ cc.Class({
             fieldArray[i].isAtked = false;
         }
         
-        this.refreshMonsterField();
+        this.refreshMonsterSprite();
     },
     
     //召唤随从请求
@@ -182,7 +185,7 @@ cc.Class({
         monster.unPackData(data);
         
         var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
-        playerSprite.refreshMonsterField();
+        playerSprite.refreshMonsterSprite();
     },
       
     //干掉随从
@@ -199,7 +202,7 @@ cc.Class({
         this.monsterSpriteArray.splice(idx,1);
         cc.log('monsterSpriteArray:%s', this.monsterSpriteArray.length)
         cc.log('fieldArray:%s', this.fieldArray.length)
-        this.refreshMonsterField();
+        this.refreshMonsterSprite();
     },
     
     //数组变动后需要刷新idx

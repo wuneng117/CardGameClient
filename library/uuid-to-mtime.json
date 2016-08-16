@@ -39,11 +39,6 @@
     "meta": 1470712794739,
     "relativePath": "Script\\data"
   },
-  "77427dda-4cfb-4894-b714-8e7a4b665559": {
-    "asset": 1470896299934,
-    "meta": 1470896299970,
-    "relativePath": "Script\\card.js"
-  },
   "e510e55a-d70f-41af-82e8-5704b3cb6d72": {
     "asset": 1469603547888,
     "meta": 1470712793752,
@@ -58,21 +53,6 @@
     "asset": 1469518268455,
     "meta": 1470712794776,
     "relativePath": "Script\\data\\CardData.js"
-  },
-  "74868942-84b2-4792-ac4e-9868e1521924": {
-    "asset": 1470992187190,
-    "meta": 1470992187323,
-    "relativePath": "Script\\duel.js"
-  },
-  "27663561-02bd-4640-bf15-3c10ad25dae4": {
-    "asset": 1470904618457,
-    "meta": 1470904618487,
-    "relativePath": "Script\\type.js"
-  },
-  "97b2c287-166e-40c3-bcb4-bd4f2476b60e": {
-    "asset": 1470898391728,
-    "meta": 1470898391772,
-    "relativePath": "Script\\monster.js"
   },
   "c6e12c10-ffa2-4edb-9c37-a00fd0fb2ea0": {
     "asset": 1469671768903,
@@ -255,8 +235,8 @@
     "relativePath": "Script\\NetWork"
   },
   "f3a087a4-64c5-462e-a26b-e326faf85a68": {
-    "asset": 1470971056306,
-    "meta": 1470971056357,
+    "asset": 1471336682510,
+    "meta": 1471336682583,
     "relativePath": "Script\\NetWork\\GameConn.js"
   },
   "fb431d04-0e1f-496e-909f-fd0c6229f6c0": {
@@ -274,16 +254,6 @@
     "meta": 1470972612652,
     "relativePath": "Script\\ChatWnd.js"
   },
-  "e48e0070-f6c9-47c5-b207-27bdf42db444": {
-    "asset": 1470987225189,
-    "meta": 1470987225541,
-    "relativePath": "Script\\PlayerSprite.js"
-  },
-  "a69b5e01-3b08-4ced-9aaf-f38b0de2db8f": {
-    "asset": 1470991432225,
-    "meta": 1470991432452,
-    "relativePath": "Script\\NetWork\\EventProcess.js"
-  },
   "09b02fe2-9ee3-4d42-b85c-9a41cca779fb": {
     "asset": 1470992057893,
     "meta": 1470992057977,
@@ -294,9 +264,39 @@
     "meta": 1470991969498,
     "relativePath": "Script\\MonsterSprite.js"
   },
+  "27663561-02bd-4640-bf15-3c10ad25dae4": {
+    "asset": 1471329046572,
+    "meta": 1471329058738,
+    "relativePath": "Script\\type.js"
+  },
+  "97b2c287-166e-40c3-bcb4-bd4f2476b60e": {
+    "asset": 1471329923204,
+    "meta": 1471329931826,
+    "relativePath": "Script\\monster.js"
+  },
+  "74868942-84b2-4792-ac4e-9868e1521924": {
+    "asset": 1471330317656,
+    "meta": 1471330320856,
+    "relativePath": "Script\\duel.js"
+  },
   "c8c0ae01-bad2-4c02-abb0-f5de6c32a7e2": {
-    "asset": 1470992142068,
-    "meta": 1470992142249,
+    "asset": 1471330792539,
+    "meta": 1471330794418,
     "relativePath": "Script\\player.js"
+  },
+  "a69b5e01-3b08-4ced-9aaf-f38b0de2db8f": {
+    "asset": 1471333852197,
+    "meta": 1471333855032,
+    "relativePath": "Script\\NetWork\\EventProcess.js"
+  },
+  "77427dda-4cfb-4894-b714-8e7a4b665559": {
+    "asset": 1471333934664,
+    "meta": 1471333965527,
+    "relativePath": "Script\\card.js"
+  },
+  "e48e0070-f6c9-47c5-b207-27bdf42db444": {
+    "asset": 1471335510255,
+    "meta": 1471335513277,
+    "relativePath": "Script\\PlayerSprite.js"
   }
 }

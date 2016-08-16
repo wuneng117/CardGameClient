@@ -58,7 +58,7 @@ cc.Class({
                 return;
             }
 
-            this.socket = window.io('http://localhost:3000');
+            this.socket = window.io('192.168.255.41:3000');
             EventProcess.init(this);
         },
 

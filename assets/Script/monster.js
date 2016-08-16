@@ -103,7 +103,7 @@ cc.Class({
         if(this.isDead())
             this._player.killMonster(this);
         
-        this._player.refreshMonsterField();
+        this._player.refreshMonsterSprite();
     },
     
     //回复HP
@@ -115,7 +115,7 @@ cc.Class({
         if(this.hp > this.maxHp)
             this.hp = this.maxHp;
         
-        this._player.refreshMonsterField();
+        this._player.refreshMonsterSprite();
     },
     
     isDead: function() {
