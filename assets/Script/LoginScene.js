@@ -1,21 +1,14 @@
 //登录界面默认脚本
-require('type');
+
+//加载默认模块
+require('type');        //全局枚举
+require('GlobalFunc');  //全局函数
 const GameConn = require('./NetWork/GameConn');
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //    default: null,
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
-        
         //-----------------------控件-------------------------------------------
         account_Editbox : {
             default: null,
@@ -30,8 +23,9 @@ cc.Class({
     
     // use this for initialization
     onLoad: function () {
-        GameConn.init();
-        GameConn.connectToServer();
+        GameConn.init();    //连接初始化
+        gCardDataManager = require('./data/CardDataManager');
+        gCardDataManager.init();
     },
 
     // called every frame, uncomment this function to activate update callback
@@ -55,8 +49,13 @@ cc.Class({
             return;
         }
         
-        cc.log("account: %s, password: %s",account, password);
-        GameConn.login(account, password);
+        cc.log("input account: %s, password: %s",account, password);
+        if(GameConn.getState() == CLIENT_STATE_DISCONNECT)
+        {
+            GameConn.connectToServer();
+            GameConn.setAccount(account, password);
+        }
+        else
+            GameConn.login(account, password);
     },
-    
 });

@@ -4,40 +4,24 @@ const Player = require('player');
 const ChatWnd = require('ChatWnd');
 const PlayerSprite = require('PlayerSprite');
 var GameConn = require('./NetWork/GameConn');
-//var EventProcess = require('./Network/EventProcess');
 
 //对战状态
-var DUEL_STATE_REST = 0;
-var DUEL_STATE_PLAYING = 1;
+var DUEL_STATE_REST     = 0;
+var DUEL_STATE_PLAYING  = 1;
 
 //分组
 var TEAM_COLOR_NONE = -1;
-var TEAM_COLOR_RED = 1;
+var TEAM_COLOR_RED  = 1;
 var TEAM_COLOR_BLUE = 2;
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //    default: null,
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
-        
-        playerVec: [],
+        playerVec: [],  //玩家数组
 
         //-----------------------控件-------------------------------------------
-        cardPrefab: {
-            default: null,
-            type: cc.Prefab
-        },
-        
-        playerSpriteVec: [PlayerSprite],    //玩家控件
+        playerSpriteVec: [PlayerSprite],    //玩家控件数组
 
         //聊天窗口脚本
         chatWnd: {
@@ -46,17 +30,9 @@ cc.Class({
         },
     },
     
-    setInputControl: function() {
-        var self = this;
-        this.node.on('touchstart', function(event) {
-            cc.log('1231312321313213123');
-            cc.log(event.getLocationX());
-        }, this);
-
-    },
-    
+    //添加玩家到玩家数组
     addPlayer: function(param) {
-        var idx = param;
+        var idx = param.idx;
         var player = this.playerVec[idx];
         //玩家数据已存在
         if(player)
@@ -66,34 +42,13 @@ cc.Class({
         }
         
         //创建玩家并加入玩家数组
-        this.createPlayer(param);
-    },
-    
-    createPlayer: function(param) {
-        var player = new Player();
+        player = new Player();
         player.init(this);
         player.unPackDataAll(param);
-        this.playerVec[param.idx] = player;
+        this.playerVec[idx] = player;
     },
-    
-    getPlayer: function(idx) {
-        return this.playerVec[idx];    
-    },
-    
-    getPlayerSprite: function(idx) {
-        return this.playerSpriteVec[idx];    
-    },
-    
-    getPlayerSpriteByPlayer: function(idx) {
-        for(var playerSprite of this.playerSpriteVec)
-        {
-            if(playerSprite.getIdx() === idx)
-                return playerSprite;
-        }
-        
-        return null;    
-    },
-    
+
+    //刷新玩家控件
     refreshPlayerSprite: function(playerIdx) {
         for(var playerSprite of this.playerSpriteVec)    
         {
@@ -106,43 +61,43 @@ cc.Class({
     },
     
     //召唤随从
-    summonMonster: function(cardIdx) {
-        GameConn.sendPacket(CW_MONSTER_SUMMON_REQUEST, cardIdx); 
-    },
- 
+    summonMonster: function(cardIdx) { GameConn.sendPacket(CW_MONSTER_SUMMON_REQUEST, cardIdx); },
     //随从攻击玩家
-    monsterAtkPlayer: function(monsterIdx, playerIdx) {
-        GameConn.sendPacket(CW_MONSTER_ATTACKPLAYER_REQUEST, {idx: monsterIdx, targetPlayerIdx: playerIdx});
-    },
-    
+    monsterAtkPlayer: function(monsterIdx, playerIdx) { GameConn.sendPacket(CW_MONSTER_ATTACKPLAYER_REQUEST, {idx: monsterIdx, targetPlayerIdx: playerIdx}); },
     //随从攻击随从
-    monsterAtkMonster: function(monsterIdx, playerIdx, targetMonsterIdx) {
-        GameConn.sendPacket(CW_MONSTER_ATTACKMONSTER_REQUEST, {idx: monsterIdx, targetPlayerIdx: playerIdx, targetMonsterIdx:targetMonsterIdx});
-     },
+    monsterAtkMonster: function(monsterIdx, playerIdx, targetMonsterIdx) { GameConn.sendPacket(CW_MONSTER_ATTACKMONSTER_REQUEST, {idx: monsterIdx, targetPlayerIdx: playerIdx, targetMonsterIdx:targetMonsterIdx}); },
     
     //回合结束（按钮调用）
     turnEnd_BtnEvent: function(event) {
         //不是自己行动不能按
         var player = this.playerVec[this.playerSpriteVec[0].getIdx()];
-        cc.log(player.getIsTurnActive());
         if(!player.getIsTurnActive())
             return;
             
         GameConn.sendPacket(CW_ENDPHASE_REQUEST, {});  //用户结束回合请求
     },
     
-    addChatItem: function(message, isSystem) {
-        this.chatWnd.addChatItem(message, isSystem);
-    },
+    addChatItem: function(message, isSystem) { this.chatWnd.addChatItem(message, isSystem); },
+     
+    getPlayer: function(idx) { return this.playerVec[idx]; },   //获取player
+    getPlayerSprite: function(idx) { return this.playerSpriteVec[idx]; },   //获取playersprite
     
-    // use this for initialization
-    onLoad: function () {
-        //this.setInputControl();
-        //初始化玩家控件
+    //根据player的idx获取playersprite
+    getPlayerSpriteByPlayer: function(idx) {
         for(var playerSprite of this.playerSpriteVec)
         {
-            playerSprite.init(this);
+            if(playerSprite.getIdx() === idx)
+                return playerSprite;
         }
+        
+        return null;    
+    },
+ 
+    // use this for initialization
+    onLoad: function () {
+        //初始化玩家控件
+        for(var playerSprite of this.playerSpriteVec)
+            playerSprite.init(this);
     },
 
     start: function() {

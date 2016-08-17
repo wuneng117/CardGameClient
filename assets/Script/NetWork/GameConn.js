@@ -1,25 +1,15 @@
 //网络连接单例
 const EventProcess = require('EventProcess');
 
-var CLIENT_STATE_DISCONNECT = -1;
-var CLIENT_STATE_GUIDE = 0;
-var CLIENT_STATE_LOGININ = 1;
-var CLIENT_STATE_DISBAND = 2;
-
+window.CLIENT_STATE_DISCONNECT  = -1;
+window.CLIENT_STATE_GUIDE       = 0;
+window.CLIENT_STATE_LOGININ     = 1;
+window.CLIENT_STATE_DISBAND     = 2;
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //    default: null,
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
     },
     
     //account结构
@@ -29,34 +19,21 @@ cc.Class({
     //}
 
     statics: {
-        socket : null, //socket.io连接
+        socket : null,  //socket.io连接
         clientId : -1,  //连接编号
         account: null,  //服务器传回来的账号信息
         state: CLIENT_STATE_DISCONNECT,  //账号状态
         
         //初始化SOCKETIO
         init: function() {
-            if(cc.sys.isNative) {
+            if(cc.sys.isNative)
                 window.io = SocketIO;
-            }
-            else {
+            else
                 window.io = require('socket.io');
-            }
-        },
-        
-        //为EventPRocess设置duel
-        setDuel: function(duel) {
-            EventProcess.setDuel(duel);    
         },
         
         //连接服务器
         connectToServer: function() {
-            if(this.socket || this.state !== CLIENT_STATE_DISCONNECT)
-            {
-                cc.log('已经与服务器建立连接，不要重复连接');
-                return;
-            }
-            
             this.socket = window.io('192.168.255.41:3000');
             EventProcess.init(this);
         },
@@ -65,6 +42,8 @@ cc.Class({
         connectSuccess: function(idx) {
             this.setClientId(idx);
             this.state = CLIENT_STATE_GUIDE;
+
+            this.login(this.account.account, this.account.password);
         },
                 
         //账号登录
@@ -120,11 +99,17 @@ cc.Class({
             //如果在战斗中，进行一些其他处理
         },
 
-        //设置clientId
-        setClientId: function(idx) {
-            this.clientId = idx;  
+        setDuel: function(duel) { EventProcess.setDuel(duel); },    //为EventPRocess设置duel
+        setClientId: function(idx) { this.clientId = idx; },        //设置clientId
+        getState: function() { return this.state; },    //获取连接状态
+
+        //设置账号信息        
+        setAccount: function(account, password) { 
+            this.account = {}; 
+            this.account.account = account; 
+            this.password = password;
         },
-        
+
         //获取账号名字
         getAccountName: function() {
             if(this.account)
@@ -132,8 +117,6 @@ cc.Class({
             else
                 return null;
         },
-
-        
     },
     
     // use this for initialization

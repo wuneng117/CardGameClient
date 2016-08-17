@@ -1,28 +1,10 @@
 const Card = require('card');
 const Monster = require('monster');
-const CardDataManager = require('./data/CardDataManager');
-
-var PLAYER_UPDATE_ISTURNACTIVE = 1;
-var PLAYER_UPDATE_HP       = 1<<1;
-var PLAYER_UPDATE_CRITICAL = 1<<2;
-var PLAYER_UPDATE_MAXCRITICAL = 1<<3;
-var PLAYER_UPDATE_ISREADY = 1<<4;
-var PLAYER_UPDATE_DECKNUM = 1<<5;
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //    default: null,
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
-        
         duel: null, //战斗管理
         idx: -1,
         teamColor: -1,
@@ -34,14 +16,12 @@ cc.Class({
         critical: 0,    //英雄当前水晶数
         maxCritical: 0, //英雄当前回合最大水晶数
         deckNum: 30,    //牌组剩余卡牌
-        deckArray: [],  //卡组数组（Card类型）
-        handArray: [],  //手牌数组（Card类型）
+        deckArray:  [],  //卡组数组（Card类型）
+        handArray:  [],  //手牌数组（Card类型）
         fieldArray: [], //场上随从数组（Monster类型）
     },
     
-    init: function(duel) {
-        this.duel = duel;
-    },
+    init: function(duel) { this.duel = duel; },
     
     //打包数据完整
     packDataAll: function(data) {
@@ -72,7 +52,7 @@ cc.Class({
     //打包数据
     packData: function(data, flag) {
         data.flag = flag;
-        data.idx = this.idx;
+        data.idx  = this.idx;
        
         if(flag & PLAYER_UPDATE_ISTURNACTIVE)
             data.isTurnActive = this.isTurnActive;
@@ -86,6 +66,8 @@ cc.Class({
             data.isReady = this.isReady;
         if(flag & PLAYER_UPDATE_DECKNUM)
             data.deckNum = this.deckNum;
+        if(flag & PLAYER_UPDATE_TEAMCOLOR)
+            data.teamColor = this.teamColor;
     },
     
     //解开数据
@@ -93,10 +75,7 @@ cc.Class({
         var flag = data.flag;
         
         if(flag & PLAYER_UPDATE_ISTURNACTIVE)
-        {
             this.isTurnActive = data.isTurnActive;
-            cc.log("isTurnActive:"+data.isTurnActive)
-        }
         if(flag & PLAYER_UPDATE_HP)
             this.hp = data.hp;
         if(flag & PLAYER_UPDATE_CRITICAL)
@@ -105,19 +84,12 @@ cc.Class({
             this.isReady = data.isReady;
         if(flag & PLAYER_UPDATE_DECKNUM)
             this.deckNum= data.deckNum;
+        if(flag & PLAYER_UPDATE_TEAMCOLOR)
+            this.teamColor = data.teamColor;
     },
-    
-    getDuel: function() { return this.duel; },
-    getIdx: function() { return this.idx; },
-    getIsTurnActive: function() { return this.isTurnActive; },
-    getHeroName: function() { return this.heroName; },
-    getHp: function() { return this.hp; },
-    getCritical: function() { return this.critical; },
-    getMaxCritical: function() { return this.maxCritical; },
-    getDeckNum: function() { return this.deckNum; },
-    
+
     //创建手牌
-    createCardToHand: function(data) {
+    handCardCreate: function(data) {
         var card = new Card();
         card.unPackDataAll(data);
         this.handArray.push(card);
@@ -127,7 +99,7 @@ cc.Class({
     },
     
     //删除手牌
-    deleteCardSprite: function(idx) {
+    handCardDelete: function(idx) {
         this.handArray.splice(idx, 1);
         
         var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
@@ -143,25 +115,11 @@ cc.Class({
         playerSprite.refreshCardSprite();
     },
     
-    //重置随从攻击次数
-    awakenMonster:function() {
-        var fieldArray = this.fieldArray;
-        
-        for(var i=0; i<fieldArray.length; ++i)
-        {
-            fieldArray[i].isAtked = false;
-        }
-        
-        this.refreshMonsterSprite();
-    },
-    
     //召唤随从请求
-    summonMonster: function(cardIdx) {
-        this.duel.summonMonster(cardIdx);
-    },
+    summonMonster: function(cardIdx) { this.duel.summonMonster(cardIdx); },
     
     //创建随从
-    createMonster: function(data) {
+    monsterCreate: function(data) {
         cc.log("创建了一个随从");
         var monster = new Monster();
         monster.unPackDataAll(data);
@@ -187,34 +145,16 @@ cc.Class({
         var playerSprite = this.duel.getPlayerSpriteByPlayer(this.idx);
         playerSprite.refreshMonsterSprite();
     },
-      
-    //干掉随从
-    killMonster: function(monster) {
-        cc.log('monsterSpriteArray:%s', this.monsterSpriteArray.length)
-        cc.log('fieldArray:%s', this.monsterSpriteArray.length)
-        cc.log('_idx:%s', monster._idx)
-        var idx = monster._idx;
-        var monsterSprite = this.monsterSpriteArray[idx];
         
-        this.monsterPool.put(monsterSprite);
-        this.fieldArray.splice(idx,1);
-        this.refreshArrayIdx(this.fieldArray);
-        this.monsterSpriteArray.splice(idx,1);
-        cc.log('monsterSpriteArray:%s', this.monsterSpriteArray.length)
-        cc.log('fieldArray:%s', this.fieldArray.length)
-        this.refreshMonsterSprite();
-    },
-    
-    //数组变动后需要刷新idx
-    refreshArrayIdx: function(array) {
-        for(var i=0; i<array.length; ++i)
-        {
-            array[i].refreshIdx(i);
-        }
-    },
-    
-    //获取手牌
-    getHandCard: function(idx) { return this.handArray[idx]; },
+    getDuel: function()         { return this.duel; },
+    getIdx: function()          { return this.idx; },
+    getIsTurnActive: function() { return this.isTurnActive; },
+    getHeroName: function()     { return this.heroName; },
+    getHp: function()           { return this.hp; },
+    getCritical: function()     { return this.critical; },
+    getMaxCritical: function()  { return this.maxCritical; },
+    getDeckNum: function()      { return this.deckNum; },
+    getHandCard: function(idx)  { return this.handArray[idx]; },     //获取手牌
     
     
     

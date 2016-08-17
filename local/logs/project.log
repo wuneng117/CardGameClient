@@ -57,3 +57,7 @@
 2016-08-16T07:52:50.485Z - normal: Compiled successfully
 2016-08-16T08:18:37.824Z - normal: Compiled successfully
 2016-08-16T08:38:05.053Z - normal: Compiled successfully
+2016-08-16T10:58:01.618Z - error: Window "main" crashed: [object Object]
+    at EventEmitter.<anonymous> (C:\CocosCreator\resources\app.asar\editor-framework\lib\main\window.js:1:3295)
+    at emitOne (events.js:82:20)
+    at EventEmitter.emit (events.js:169:7)

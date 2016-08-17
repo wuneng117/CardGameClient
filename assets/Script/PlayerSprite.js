@@ -4,19 +4,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //    default: null,
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
-        idx: -1,        //对应玩家IDX
-        duel: null,    //游戏管理
+        idx: -1,        //对应玩家IDX,不是数组的IDX!
+        duel: null,     //游戏管理
         handCardSpriteArray: [], //手牌图片数组
-        monsterSpriteArray: [], //随从图片数组
+        monsterSpriteArray:  [], //随从图片数组
         
         //------------------------模板------------------------------------------
         cardPrefab: {
@@ -63,50 +54,47 @@ cc.Class({
             default: null,
             type: cc.Label
         },
-        
-        //水晶
-        criticalSpriteArray :[cc.Sprite],
-        
+                
         //卡组牌数
         deckLabel: {
             default: null,
             type: cc.Label
         },
+
+        //水晶
+        criticalSpriteArray :[cc.Sprite],
     },
     
     init: function(duel) {
         this.idx = -1;
         this.duel = duel;
         for(var node of this.handCardSpriteArray)
-        {
             this.cardPool.put(node);
-        }
+
         this.handCardSpriteArray = [];
         
         for(var node1 of this.monsterSpriteArray)
-        {
             this.cardPool.put(node);
-        }
+
         this.monsterSpriteArray = [];
         
         //头像
         
-        //HP
-        this.heroHpLabel.string = '0';
-        //名字
-        this.heroNameLabel.string = '';
+        this.heroHpLabel.string = '0';  //HP
+        this.heroNameLabel.string = ''; //名字
+        this.deckLabel.string = '30';   //牌组剩余
+        
         //水晶
         for(var criticalSprite of this.criticalSpriteArray)
-        {
             criticalSprite.setVisible(0);
-        }
-        this.deckLabel.string = '30';
     },
     
     //界面刷新
     refresh: function() {
         var player = this.duel.getPlayer(this.idx);
-        
+        if(!player)
+            return;
+
         //水晶图片刷新
         var criticalSpriteArray = this.criticalSpriteArray;
         var i=0;
@@ -128,22 +116,18 @@ cc.Class({
             criticalSpriteArray[i].setVisible(0);
         }
     
-        this.heroHpLabel.string = player.getHp().toString();  
-        this.heroNameLabel.string = player.getHeroName();
-        this.deckLabel.string = player.getDeckNum().toString();
+        this.heroHpLabel.string     = player.getHp().toString();  
+        this.heroNameLabel.string   = player.getHeroName();
+        this.deckLabel.string       = player.getDeckNum().toString();
     },
     
     //创建手牌图片
     createCardSprite: function(card) {
         var cardSprite;
         if(this.cardPool.size() > 0)
-        {
             cardSprite = this.cardPool.get(this);
-        }
         else
-        {
             cardSprite = cc.instantiate(this.cardPrefab);
-        }
         
         this.handFiledLayout.node.addChild(cardSprite);
         this.handCardSpriteArray.push(cardSprite);
@@ -163,13 +147,9 @@ cc.Class({
         //创建随从图片资源
         var monsterSprite;
         if(this.monsterPool.size() > 0)
-        {
             monsterSprite = this.monsterPool.get(this);
-        }
         else
-        {
             monsterSprite = cc.instantiate(this.monsterPrefab);
-        }
     
         this.monsterFieldLayout.addChild(monsterSprite);
         this.monsterSpriteArray.push(monsterSprite);
@@ -184,13 +164,13 @@ cc.Class({
         this.refreshMonsterSprite(); //刷新随从图片       
     },
     
-    //-----------------------界面刷新---------------------------------------
+    //----------------------------------------界面刷新-------------------------------------------------
     //手牌图片刷新
     refreshCardSprite: function() {
         var player = this.duel.getPlayer(this.idx);
         var handArray = player.handArray;
+        var arrayLength = handArray.length;        
         var handCardSpriteArray = this.handCardSpriteArray;
-        var arrayLength = handArray.length;
 
         for(var i=0; i<arrayLength; ++i)
         {
@@ -211,21 +191,15 @@ cc.Class({
     refreshMonsterSprite: function() {
         var player = this.duel.getPlayer(this.idx);
         var fieldArray = player.fieldArray;
+        var arrayLength = fieldArray.length;    
         var monsterSpriteArray = this.monsterSpriteArray;
-        var arrayLength = fieldArray.length;
 
         for(var i=0; i<arrayLength; ++i)
         {
             if(monsterSpriteArray[i])
             {
-                cc.log("fieldArray length:"+arrayLength);
-                cc.log("this.idx:"+this.idx+" player idx:"+player.idx);
-                cc.log("is turn:"+player.isTurnActive);
                 monsterSpriteArray[i].getComponent('MonsterSprite').init(fieldArray[i], player, i);
                 monsterSpriteArray[i].setPosition(110*i+monsterSpriteArray[i].width/2-this.monsterFieldLayout.width/2, 0);
-                //cc.log(monsterSpriteArray[i].width);
-                //cc.log(this.monsterFieldLayout.node.width);
-                //monsterSpriteArray[i].setPosition(0,0);
                 if(fieldArray[i].isAtked)
                     monsterSpriteArray[i].opacity = 100;
                 else
@@ -239,15 +213,12 @@ cc.Class({
         }
     },
     
-    
     setIdx: function(idx) { this.idx = idx;},
     getIdx: function() { return this.idx;},
     
     // use this for initialization
     onLoad: function () {
         this.cardPool = new cc.NodePool('card');
-        //cc.log('this.cardPool type');
-        //cc.log(this.cardPool);
         this.monsterPool = new cc.NodePool('monster');
     },
 

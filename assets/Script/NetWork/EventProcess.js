@@ -1,7 +1,8 @@
 var ERROR_NOERROR = 0;
 
 var LOGIN_ERROR_NOTFOUND = 1;
-var LOGIN_ERROR_PASSWORD_ERROR = 2;
+var LOGIN_ERROR_PASSWORD = 2;
+var LOGIN_ERROR_LOGINED  = 3;
 
 var ERROR_ENTERROOM_INROOM = 1;
 var ERROR_DUELREADY_ISPLAYING = 1;
@@ -59,7 +60,7 @@ cc.Class({
         //连接响应
         WC_CONNECTED: function(param) {
             this.gameConn.connectSuccess(param.idx);
-            cc.log('收到服务器连接响应，clientid: %d, name: %s', param.idx, param.name);
+            cc.log('收到服务器连接响应，clientid: %d', param.idx);
         },
         
         //登录响应
@@ -78,6 +79,10 @@ cc.Class({
             {
                 showTipLabel('登录失败，账号不存在');
             }
+            else if(param.error == LOGIN_ERROR_LOGINED)
+            {
+                showTipLabel('登录失败，账号已经登录');
+            }
             else
             {
                 showTipLabel('登录失败，未知错误');
@@ -87,13 +92,15 @@ cc.Class({
         //进入房间响应
         WC_ENTERROOM_RESPONSE: function(param) {
             var error = param.error;
-            if(error == ERROR_ENTERROOM_INROOM)
-                cc.log('您已经进入房间，不可再次进入');
-            else if(error === ERROR_NOERROR)
+            if(error === ERROR_NOERROR)
             {
                 cc.log('成功进入房间');
                 this.gameConn.sendPacket(CW_DUELREADY_REQUEST, {});  //直接准备
             }
+            else if(error == ERROR_ENTERROOM_INROOM)
+                cc.log('您已经进入房间，不可再次进入');
+            else
+                cc.log('未知错误');            
         },
         
         //添加聊天信息响应(以后写)
@@ -101,14 +108,10 @@ cc.Class({
         },
         
         //服务端发送聊天信息
-        WC_CHAT_ADD: function(param) {
-            this.duel.addChatItem(param.message, param.isSystem);
-        },
+        WC_CHAT_ADD: function(param) { this.duel.addChatItem(param.message, param.isSystem); },
         
         //添加完整玩家数据
-        WC_PLAYER_ADD: function(param) {
-            this.duel.addPlayer(param);
-        },
+        WC_PLAYER_ADD: function(param) { this.duel.addPlayer(param); },
         
         //Player更新
         WC_PLAYER_UPDATE: function(param) {
@@ -118,39 +121,32 @@ cc.Class({
                 return;
             
             player.unPackData(param);
-            var playerSprite = this.duel.getPlayerSpriteByPlayer(idx);
-            playerSprite.refresh();
+            this.duel.refreshPlayerSprite(idx);
         },
         
-         
         //准备游戏响应
         WC_DUELREADY_RESPONSE: function(param) {
             var error = param.error;
-            if(error === ERROR_DUELREADY_ISPLAYING)
-            {
-                showTipLabel('游戏已经开始了，不能准备', cc.Color.RED);
-            }
-            else
+            if(error === ERROR_NOERROR)
             {
                 //第0个玩家控件为玩家自己，设置为玩家IDX
                 var playerSprite = this.duel.getPlayerSprite(0);
-                cc.log(typeof(playerSprite));
                 playerSprite.setIdx(param.idx);
+                playerSprite.refresh();
             }
+            else if(error === ERROR_DUELREADY_ISPLAYING)
+                showTipLabel('游戏已经开始了，不能准备', cc.Color.RED);
+            else
+                showTipLabel('未知错误', cc.Color.RED);
         }, 
         
         //有玩家准备游戏
         WC_DUELREADY: function(param) {
             var idx = param.idx;
-            // cc.log("玩家%d准备了游戏！", idx);
-            // cc.log("playerVec[0]idx:"+this.duel.getPlayer(0).idx);
-            // cc.log("playerSpriteVec[0],[1] idx:"+this.duel.getPlayerSprite(0).idx+this.duel.getPlayerSprite(1).idx);
             //玩家更新
             var player = this.duel.getPlayer(idx);
             if(!player)
                 return;
-            
-            player.unPackData(param);
             
             //玩家控件更新
             //3种情况 
@@ -162,13 +158,9 @@ cc.Class({
             if(playerSprite.getIdx() !== idx)
             {
                 if(playerSprite1.getIdx() !== -1)
-                {
                     playerSprite.setIdx(idx);
-                }
                 else
-                {
                     playerSprite1.setIdx(idx);
-                }
             }
             
             // cc.log("玩家结束准备了游戏！");
@@ -179,47 +171,40 @@ cc.Class({
         
         WC_HANDCARD_CREATE: function(param) {
             var playerIdx = param.playerIdx;
-            var player = this.duel.getPlayer(playerIdx);
-            
-            player.createCardToHand(param.data);
+            var player = this.duel.getPlayer(playerIdx);  
+            player.handCardCreate(param.data);
         },
         
         WC_HANDCARD_UPDATE: function(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
-            var data = param.data;
-            player.handCardUpdate(data);
+            player.handCardUpdate(param.data);
         },
         
         WC_HANDCARD_DELETE: function(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
-            var idx = param.idx;
-            player.deleteCardSprite(idx);
+            player.handCardDelete(param.idx);
         },
         
         WC_MONSTER_CREATE: function(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
-            player.createMonster(param.data);
+            player.monsterCreate(param.data);
         },
         
         WC_MONSTER_UPDATE: function(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
-            var data = param.data;
-            player.monsterUpdate(data);
+            player.monsterUpdate(param.data);
         },
         
         WC_MONSTER_DELETE: function(param) {
             var playerIdx = param.playerIdx;
             var player = this.duel.getPlayer(playerIdx);
-            var idx = param.idx;
-            player.monsterDelete(idx);
+            player.monsterDelete(param.idx);
         },
-
     },
-    
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
