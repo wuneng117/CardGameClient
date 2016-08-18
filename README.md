@@ -1,8 +1,19 @@
-# HeartStone simple demo
+# 卡牌游戏的客户端
 
-this project is created by cocoscreator v1.1.2.
+简介：
 
-1.no monster effect or magic card effect
-2.no internet work
+类似炉石传说的卡牌游戏DEMO，比较简陋，只实现了一下几个功能：
+
+用账号密码登录，2个玩家登陆后就开始对战
+
+每回合抽牌，水晶增减
+
+随从召唤·攻击对方英雄或者随从
+
+
+1.用cocoscreator v1.1.2开发，包含整个工程
+
+2.服务端见CardGameServer
+
 
 
